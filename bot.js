@@ -854,7 +854,7 @@ client.on('message', message => {
   if (message.content.startsWith("~inv")) {
            if(!message.channel.guild) return message.channel.send("This Command is Just For Servers!")
            var embed = new Discord.RichEmbed()
-           .setTitle("⋙ arrow_forward: Click here to invite bot :arrow_backward: ⋘")
+           .setTitle("⋙ :arrow_forward: Click here to invite bot :arrow_backward: ⋘")
            .setURL("https://discordapp.com/api/oauth2/authorize?client_id=536886859100585984&permissions=0&scope=bot")
            .setTimestamp()
            .setColor("RANDOM")
