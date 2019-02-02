@@ -45,6 +45,59 @@ client.on('ready', function(){
 });
 
 
+client.on('message', message => {
+var prefix = "~";
+      if(message.content === prefix + "hchannel") {
+      if(!message.channel.guild) return;
+      if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('You Dont Have Perms :x:');
+             message.channel.overwritePermissions(message.guild.id, {
+             READ_MESSAGES: false
+ })
+              message.channel.send('Channel Hided Successfully ! :white_check_mark:  ')
+ }
+});
+
+client.on('message',async Epic => {
+  var prefix = "~" ;
+  if(Epic.content.startsWith(prefix + "vonline")) {
+  if(!Epic.guild.member(Epic.author).hasPermissions('MANAGE_CHANNELS')) return Epic.reply(':x: **I Dont Have Permissions**');
+  if(!Epic.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return Epic.reply(':x: **You Dont Have Permissions**');
+  Epic.guild.createChannel(`Voice Online : [ ${Epic.guild.members.filter(m => m.voiceChannel).size} ]` , 'voice').then(c => {
+    console.log(`Voice Online Is Activation In ${Epic.guild.name}`);
+    c.overwritePermissions(Epic.guild.id, {
+      CONNECT: false,
+      SPEAK: false
+    });
+    setInterval(() => {
+      c.setName(`Voice Online :  ${Epic.guild.members.filter(m => m.voiceChannel).size} .`)
+    },1000);
+  });
+  }
+});
+
+client.on('message', message => {
+var prefix = "~";
+var cats = ["http://www.shuuf.com/shof/uploads/2015/09/09/jpg/shof_b9d73150f90a594.jpg","https://haltaalam.info/wp-content/uploads/2015/05/0.208.png","https://haltaalam.info/wp-content/uploads/2015/05/266.png","https://haltaalam.info/wp-content/uploads/2015/05/250.png","https://haltaalam.info/wp-content/uploads/2017/02/0.2517.png","https://pbs.twimg.com/media/CP0mi02UAAA3U2z.png","http://www.shuuf.com/shof/uploads/2015/08/31/jpg/shof_3b74fa7295ec445.jpg","http://www.shuuf.com/shof/uploads/2015/08/22/jpg/shof_fa3be6ab68fb415.jpg","https://pbs.twimg.com/media/CSWPvmRUcAAeZbt.png","https://pbs.twimg.com/media/B18VworIcAIMGsE.png"]
+        var args = message.content.split(" ").slice(1);
+    if(message.content.startsWith(prefix + 'هل تعلم')) {
+         var cat = new Discord.RichEmbed()
+.setImage(cats[Math.floor(Math.random() * cats.length)])
+message.channel.sendEmbed(cat);
+    }
+});
+
+client.on('message', message => {
+var prefix = "~";
+      if(message.content === prefix + "schannel") {
+      if(!message.channel.guild) return;
+      if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply(':x:');
+             message.channel.overwritePermissions(message.guild.id, {
+             READ_MESSAGES: true
+ })
+              message.channel.send('Done  ')
+ }
+});
+
 client.on('message', message=> {
     if (message.author.bot) return;
     if (message.isMentioned(client.user))
@@ -2540,7 +2593,7 @@ ${message.author.id}`);
        });
    
 client.on('message', message => {
-	var prefix = "-";
+	var prefix = "~";
 if(!message.channel.guild) return;
 if(message.content.startsWith(prefix + 'move')) {
  if (message.member.hasPermission("MOVE_MEMBERS")) {
@@ -2571,6 +2624,8 @@ message.channel.send("`You Cant Move"+ message.mentions.members.first() +" `The 
 message.react("❌")
  }}});
   
+  
+  
   client.on('message',async message => {
   let args = message.content.split(" ").slice(1).join(" ");
   let role = message.guild.roles.find('name',args) || message.guild.roles.get(args);
@@ -2596,6 +2651,37 @@ message.react("❌")
   }
 }); 
    
+client.on("message", message => {
+    var prefix = "~";
+    const command = message.content.split(" ")[0];
+
+    if(command == prefix+"kv"){
+
+        if (!message.guild.member(message.author).hasPermission('MOVE_MEMBERS') || !message.guild.member(message.author).hasPermission('ADMINISTRATOR')) {
+            return message.reply('you do not have permission to perform this action!');
+        }
+
+        var member = message.guild.members.get(message.mentions.users.array()[0].id);
+        if(!message.mentions.users){
+            message.reply("please mention the member")
+            return;
+        }
+
+    if(!member.voiceChannel){
+    message.reply("i can't include voice channel for member!")
+    return;
+    }
+              message.guild.createChannel('voicekick', 'voice').then(c => {
+                member.setVoiceChannel(c).then(() => {
+                    c.delete(305).catch(console.log)
+        
+
+
+    
+      });
+     });
+    }
+});
 
 client.on('message', message => {
 	var prefix = "~";
@@ -2619,6 +2705,14 @@ if(!args[0]) return message.reply('Write Some Things');
 	=-=-=-=-=-= :crown: admin Commands -  اوامر ادارة السيرفر :crown: =-=-=-=-=-= 
 	
 ❖~bc ⇏ رسالة جماعية الى كل اعضاء السيرفر
+
+❖~vonline ⇏ يسوي رووم فويس اونلاين
+
+❖~schannel ⇏ اضهار الشات المخفية
+
+❖~kv ⇏ لطرد عضو من روم صوتي
+
+❖~hchannel ⇏ اخفاء الشات
 
 ❖~talk ⇏ للتكلم بصفة البوت
 
@@ -2800,6 +2894,8 @@ if (message.content.startsWith(prefix + "uptime")) {
 ❖~8ball ⇏ لعبه تسال البوت اسال  وهو يجاوب عنها
 
 ❖~cuttweet ⇏ لعبة كت تويت
+
+❖~هل تعلم
 
 ❖~cal ⇏ ألة حاسبة
 
