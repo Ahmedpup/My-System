@@ -2741,6 +2741,8 @@ if (message.content.startsWith(prefix + 'help')) {
 
 ❖~quran ⇏ لعرض 200 صفحة من القرآن الكريم
 
+❖~perms ⇏ يوريك صلاحياتك
+
 ❖~uptime ⇏ لمعرفة كم صار للبوت شغال
 
 ❖~contact ⇏ للتواصل مع صاحب البوت
@@ -2780,7 +2782,13 @@ Click On ▶ To Go Administor Side
 	
 ❖~bc ⇏ رسالة جماعية الى كل اعضاء السيرفر
 
-❖~vonline ⇏ يسوي رووم فويس اونلاين
+❖~setbot ⇏ لعمل روم صوتي بعدد البوتات في السيرفر
+
+❖~rbc ⇏ لارسال بوردكاست الاعضاء رتبة معينة
+
+❖~setmember ⇏ لعمل روم صوتي بعدد اعضاء السيرفر
+
+❖~vonline ⇏ لعمل روم صوتي اونلاين
 
 ❖~schannel ⇏ اضهار الشات المخفية
 
@@ -2932,6 +2940,74 @@ Click On ▶ To Go To Games side
     })
     }
 }); 
+
+client.on('message', message => {
+  var prefix ="~";
+if (message.content.startsWith(prefix + 'perms')) {
+         if(!message.channel.guild) return;
+         var perms = JSON.stringify(message.channel.permissionsFor(message.author).serialize(), null, 4);
+         var zPeRms = new Discord.RichEmbed()
+         .setColor('RANDOM')
+         .setTitle(':tools: Permissions')
+         .addField('Your Permissions:',perms)
+                  message.channel.send({embed:zPeRms});
+ 
+    }
+});
+
+client.on('message' , message => {
+  var prefix = "~";
+  if(message.author.bot) return;
+  if(message.content.startsWith(prefix + "rbc")) {
+    let args = message.content.split(" ").slice(1);
+ 
+    if(!args[0]) {
+      message.channel.send("قم بمنشنه رتبه معينه");
+        return;
+    }
+ 
+      if(args[0] == "@everyone") {
+        message.channel.send(`لقد تم ارسال هذه الرسالة الى ${message.guild.memberCount} اعضاء`);
+        message.guild.members.forEach(mi => {
+          mi.send(
+          "الرسالة :" + "\n" +
+         "**" + `${args[1]}` + "**"
+          );
+        });
+        return;
+      }
+          var role = message.mentions.roles.first();
+            if(!role) {
+              message.reply("يرجا كتابه اسم رتبه موجوده");
+                return;
+            }
+        message.guild.members.filter(m => m.roles.get(role.id)).forEach(sa => {
+        sa.send(
+          "الرساله :" + "\n" +
+        "**" + `${args[1]}` + "**"
+          );
+        });
+      message.channel.send(`**لقد تم ارسال هذه الرسالة الى ${message.guild.members.filter(m => m.roles.get(role.id)).size} عظو**`);
+    }
+});
+
+client.on('message',async message => {
+    if(message.content.startsWith(prefix + "setmember")) {
+    if(!message.guild.member(message.author).hasPermissions('MANAGE_CHANNELS')) return message.reply('❌ **لا تمتلك صلاحيه**');
+    if(!message.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.reply('❌ **لا امتلك صلاحيه**');
+    message.channel.send('✅| **تم عمل الروم بنجاح**');
+    message.guild.createChannel(`Members : [ ${message.guild.members.size} ]` , 'voice').then(c => {
+      console.log(`Done make room in: \n ${message.guild.name}`);
+      c.overwritePermissions(message.guild.id, {
+        CONNECT: false,
+        SPEAK: false
+      });
+      setInterval(() => {
+        c.setName(`Members : [ ${message.guild.members.size} ]`)
+      },1000);
+    });
+    }
+  });
 
 client.on('message', message => {
 if(message.content === prefix + 'quran') {
@@ -3280,6 +3356,24 @@ client.on("message", message => {
  message.delete(); 
 };     
 });
+
+  client.on('message',async message => {
+    if(message.content.startsWith(prefix + "setbot")) {
+    if(!message.guild.member(message.author).hasPermissions('MANAGE_CHANNELS')) return message.reply('❌ **لا تمتلك صلاحيه**');
+    if(!message.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.reply('❌ **لا امتلك صلاحيه**');
+    message.channel.send('✅| **تم عمل الروم بنجاح**');
+    message.guild.createChannel(`Bots : : [ ${message.guild.members.filter(m=>m.user.bot).size} ]` , 'voice').then(c => {
+      console.log(`Done make room in: \n ${message.guild.name}`);
+      c.overwritePermissions(message.guild.id, {
+        CONNECT: false,
+        SPEAK: false
+      });
+      setInterval(() => {
+        c.setName(`Bots : [ ${message.guild.members.filter(m=>m.user.bot).size} ]`)
+      },1000);
+    });
+    }
+  });
 
   client.on('message', async message => {
             if(message.content.includes('discord.gg')){ 
