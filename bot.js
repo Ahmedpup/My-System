@@ -3305,7 +3305,7 @@ if(message.channel.type === 'dm') return;
         .then(collected => {
             collected.first().delete();
             msge = collected.first().content;
-            msg.edit('✅ **|  هل تريد منشن في الرسالة ؟ [نعم او لا] **').then(msg => {
+            msg.edit('✅ **هل تريد منشن في رسالتك ؟ نعم او لا**').then(msg => {
               message.channel.awaitMessages(filter, {
                 max: 1,
                 time: 90000,
@@ -3347,7 +3347,7 @@ message.guild.members.filter(m => m.presence.status === 'online').forEach(m => {
          .then(collected => {
              collected.first().delete();
              msge = collected.first().content;
-             msg.edit('✅ **|  هل تريد منشن في الرسالة ؟ [نعم او لا] **').then(msg => {
+             msg.edit('✅ **هل تريد منشن في رسالتك ؟ نعم او لا**').then(msg => {
                message.channel.awaitMessages(filter, {
                  max: 1,
                  time: 90000,
@@ -3410,7 +3410,7 @@ message.guild.members.filter(m => m.presence.status === 'online').forEach(m => {
          .then(collected => {
              collected.first().delete();
              msge = collected.first().content;
-             msg.edit('✅ **|  هل تريد منشن في الرسالة ؟ [نعم او لا] **').then(msg => {
+             msg.edit('✅ **هل تريد منشن في رسالتك ؟ نعم او لا**').then(msg => {
                message.channel.awaitMessages(filter, {
                  max: 1,
                  time: 90000,
@@ -3465,7 +3465,7 @@ message.guild.members.filter(m => m.presence.status === 'online').forEach(m => {
              collected.first().delete();
              role = collected.first().content;
                  let rolecheak = message.guild.roles.find('name', `${role}`)
-             msg.edit('✅ **|  هل تريد منشن في الرسالة ؟ [نعم او لا] **').then(msg => {
+             msg.edit('✅ **هل تريد منشن في رسالتك ؟ نعم او لا**').then(msg => {
                message.channel.awaitMessages(filter, {
                  max: 1,
                  time: 90000,
@@ -3526,7 +3526,7 @@ message.guild.members.filter(m => m.presence.status === 'online').forEach(m => {
              collected.first().delete();
              role = collected.first().content;
                  let rolecheak = message.guild.roles.find('name', `${role}`)
-             msg.edit('✅ **|  هل تريد منشن في الرسالة ؟ [نعم او لا] **').then(msg => {
+             msg.edit('✅ **هل تريد منشن في رسالتك ؟ نعم او لا**').then(msg => {
                message.channel.awaitMessages(filter, {
                  max: 1,
                  time: 90000,
