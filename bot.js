@@ -3,7 +3,6 @@ const client = new Discord.Client();
 const moment = require('moment');
 const zalgo = require('zalgolize');
 const figlet = require('figlet'); 
-const antispam = require("anti-spam");
 const prefix = '~'
 
 client.on('message', msg => {
@@ -100,17 +99,6 @@ client.on('message',async Epic => {
   }
 });
 
-antispam(client, {
-  warnBuffer: 3, 
-  maxBuffer: 5, 
-  interval: 1000, 
-  warningMessage: "!! تم تحذيرك هذه المرة توقف", 
-  roleMessage: "البادي اظلم", 
-  roleName: "Muted", 
-  maxDuplicatesWarning: 7, 
-  maxDuplicatesBan: 10, 
-  time: 10, 
-});
 
 client.on('message', message => {
 var prefix = "~";
@@ -123,24 +111,7 @@ message.channel.sendEmbed(cat);
     }
 });
 
-client.on('message', message => {
-             if (!message.channel.guild) return;
-      if (message.author.bot) return;
 
-  if (!message.content.startsWith(prefix)) return;
-  let command = message.content.split(" ")[0];
-  command = command.slice(prefix.length);
-  let args = message.content.split(" ").slice(1);
-  
-  if (command === '~invites') {
-    message.guild.fetchInvites().then(invs => {
-      let member = client.guilds.get(message.guild.id).members.get(message.author.id);
-      let personalInvites = invs.filter(i => i.inviter.id === message.author.id);
-      let inviteCount = personalInvites.reduce((p, v) => v.uses + p, 0);
-    return message.reply(`**${inviteCount}: عدد الاشخاص الذي دعوتهم هو**`)
-
-});
-}});
 
 client.on('message', message => {
 var prefix = "~";
@@ -2743,6 +2714,18 @@ if (message.content.startsWith(prefix + "uptime")) {
 }
 });
 
+client.on('message', message => {    
+            if (message.content.startsWith(prefix + "cto")) {
+                if(!message.channel.guild) return;
+                if (!message.member.hasPermission("MANAGE_CHANNEL"))  return;
+      var a= message.content.split(' ').slice(1).join("  ");
+      if (!a) return message.reply("اكتب كلام لوضعه في التوبيك!")
+      message.channel.setTopic(`${a}`)
+      .then(newChannel => message.channel.send(`تم تغيير التوبيك لـ **${a}**`))
+      .catch(console.error);
+            }
+        });
+
   client.on('message', message => {
 if (message.content.startsWith(prefix + 'Phelp')) { 
     message.channel.send('**تم ارسال المساعدة في الخاص** :mailbox_with_mail: ');
@@ -2753,8 +2736,6 @@ if (message.content.startsWith(prefix + 'Phelp')) {
 ❖~ping ⇏ لمعرفة سرعة اتصال البوت
 
 ❖~link ⇏ يسويلك رابط لمدة يوم وعدد الاستخدامات 100
-
-❖~invites ⇏ لمعرفة عدد دعواتك
 
 ❖~tag ⇏ لعمل تاغ للكلام
 
@@ -2808,6 +2789,8 @@ Click On ▶ To Go Administor Side
 ❖~bans ⇏ الاعضاء المبندين من سيرفرك
 
 ❖~setmember ⇏ لعمل روم صوتي بعدد اعضاء السيرفر
+
+❖~cto ⇏ تغير الكلام في اعلى الروم
 
 ❖~v2min ⇏ لصنع روم صوتي مؤقت
 
@@ -3006,8 +2989,6 @@ reaction1.on("collect", r => {
 
 ❖~link ⇏ يسويلك رابط لمدة يوم وعدد الاستخدامات 100
 
-❖~invites ⇏ لمعرفة عدد دعواتك
-
 ❖~tag ⇏ لعمل تاغ للكلام
 
 ❖~تقديم
@@ -3063,6 +3044,8 @@ reaction2.on("collect", r => {
 ❖~bans ⇏ الاعضاء المبندين من سيرفرك
 
 ❖~setmember ⇏ لعمل روم صوتي بعدد اعضاء السيرفر
+
+❖~cto ⇏ تغير الكلام في اعلى الروم
 
 ❖~v2min ⇏ لصنع روم صوتي مؤقت
 
