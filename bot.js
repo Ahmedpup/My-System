@@ -3,7 +3,32 @@ const client = new Discord.Client();
 const moment = require('moment');
 const zalgo = require('zalgolize');
 const figlet = require('figlet'); 
+const antispam = require("anti-spam");
 const prefix = '~'
+
+client.on('message', msg => {
+    if (msg.content === 'احبك') {
+      msg.reply('**لاتحتك يا اخوي لو سمحت**');
+    }
+  });
+  
+  client.on("message", message => {
+    if(message.content.startsWith(prefix + 'v2min')) {
+     let args = message.content.split(" ").slice(1);
+       var nam = args.join(' ');
+    
+      if(!message.member.hasPermission('ADMINISTRATOR')) return    message.channel.send('`ADMINISTRATOR` للأسف هذه الخاصية تحتاج الى ').then(msg => msg.delete(6000))
+      if (!nam) return message.channel.send(`<@${message.author.id}> يجب عليك ادخال اسم`).then(msg => msg.delete(10000))
+      message.guild.createChannel(nam, 'voice').then(c => setTimeout(() => c.delete(), 120000)) 
+      message.channel.send(`:ballot_box_with_check: TemporarySound : \`${nam}\``).then(c => setTimeout(() => c.edit(`<@${message.author.id}> :stopwatch:  انتهى وقت الروم الصوتي`), 120000)) 
+    }
+    });
+  
+  client.on('message', msg => {
+    if (msg.content === 'هلا') {
+      msg.reply('**هلا بيك <3**');
+    }
+  });
 
 client.on('ready', function(){
     var ms = 10000 ;
@@ -73,6 +98,18 @@ client.on('message',async Epic => {
     },1000);
   });
   }
+});
+
+antispam(client, {
+  warnBuffer: 3, 
+  maxBuffer: 5, 
+  interval: 1000, 
+  warningMessage: "!! تم تحذيرك هذه المرة توقف", 
+  roleMessage: "البادي اظلم", 
+  roleName: "Muted", 
+  maxDuplicatesWarning: 7, 
+  maxDuplicatesBan: 10, 
+  time: 10, 
 });
 
 client.on('message', message => {
@@ -843,17 +880,7 @@ client.on('voiceStateUpdate', (voiceOld, voiceNew) => {
     }  
 }); 
 
-client.on('message', message => {
-  if (message.content.startsWith("~inv")) {
-           if(!message.channel.guild) return message.channel.send("This Command is Just For Servers!")
-           var embed = new Discord.RichEmbed()
-           .setTitle("⋙ :arrow_forward: Click here to invite bot :arrow_backward: ⋘")
-           .setURL("https://discordapp.com/api/oauth2/authorize?client_id=536886859100585984&permissions=0&scope=bot")
-           .setTimestamp()
-           .setColor("RANDOM")
-           message.channel.send({embed})
-       }
-   });
+
 
 client.on("message", msg => {
   if(msg.content === '~' + "id") {
@@ -1236,6 +1263,41 @@ ${attentions[message.guild.id]['msg']}**`).then(msge => {
     }
     });
 
+	client.on('message', message=>{
+    if (message.content ===  "~leave"){
+    message.guild.leave();
+            }
+});
+
+	client.on("message", msg => { 
+    if(msg.content.startsWith(prefix + "inv")){ 
+        let e = new Discord.RichEmbed() 
+        .setTitle("**اضافه البوت لسيرفرك**") 
+       .setDescription(`**📬 | اذا تريد البوت يرسلك الرابط بخاصك
+       📇 | اذا تريد البوت يرسلك الرابط هنا بالشات**`)
+        msg.channel.send(e).then(b => {
+            b.react('📇')
+            .then(() => b.react('📬'))
+            .then(() =>b.react('📇'))
+            let reaction1Filter = (reaction, user) => reaction.emoji.name === '📇' && user.id === msg.author.id;
+let reaction2Filter = (reaction, user) => reaction.emoji.name === '📬' && user.id === msg.author.id;
+
+let reaction1 = b.createReactionCollector(reaction1Filter, { time: 12000 });
+let reaction2 = b.createReactionCollector(reaction2Filter, { time: 12000 });
+reaction1.on("collect", r => {
+msg.reply(`https://discordapp.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=0&scope=bot`)
+b.delete(2000)
+})
+reaction2.on("collect", r => {
+    msg.author.send(`${msg.author} https://discordapp.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=0&scope=bot`)
+    b.delete(2000)
+    msg.reply("**تم ارسال الرابط في خاصك 📬**").then(d => {
+        d.delete(2000)
+    })
+    })
+        })
+    }
+});
 
 client.on('message',  (message) => {
         if(message.content.startsWith('~slap')) {
@@ -1457,7 +1519,7 @@ const Sra7a = [
     'صراحه  |  ما هي أمنياتك المُستقبلية؟‏',
 ]
   client.on('message', message => {
-if (message.content.startsWith('$sra7a')) {
+if (message.content.startsWith('~sra7a')) {
     if(!message.channel.guild) return message.reply('** This command only for servers **');
  var client= new Discord.RichEmbed()
  .setTitle("لعبة صراحة ..")
@@ -2747,6 +2809,10 @@ Click On ▶ To Go Administor Side
 
 ❖~setmember ⇏ لعمل روم صوتي بعدد اعضاء السيرفر
 
+❖~v2min ⇏ لصنع روم صوتي مؤقت
+
+❖~leave ⇏ لطرد البوت من سيرفرك
+
 ❖~ranks ⇏ يوريك رتب السيرفر
 
 ❖~vonline ⇏ لعمل روم صوتي اونلاين
@@ -2836,6 +2902,8 @@ Click On ▶ To Go To Games side
 ❖~cats ⇏ قطط كيوت
 
 ❖~love ⇏ يعطيك اقوال عن الحب 
+
+❖~sara7a ⇏ لعبة صراحة
 
 ❖~roll ⇏ قرعة
 
@@ -2996,11 +3064,15 @@ reaction2.on("collect", r => {
 
 ❖~setmember ⇏ لعمل روم صوتي بعدد اعضاء السيرفر
 
+❖~v2min ⇏ لصنع روم صوتي مؤقت
+
 ❖~ranks ⇏ يوريك رتب السيرفر
 
 ❖~vonline ⇏ لعمل روم صوتي اونلاين
 
 ❖~schannel ⇏ اضهار الشات المخفية
+
+❖~leave ⇏ لطرد البوت من سيرفرك
 
 ❖~kv ⇏ لطرد عضو من روم صوتي
 
@@ -3089,6 +3161,8 @@ reaction3.on("collect", r => {
 ❖~cats ⇏ قطط كيوت
 
 ❖~love ⇏ يعطيك اقوال عن الحب 
+
+❖~sara7a ⇏ لعبة صراحة
 
 ❖~roll ⇏ قرعة
 
