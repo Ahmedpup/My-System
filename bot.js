@@ -25,7 +25,7 @@ client.on('message', msg => {
   
   client.on('message', msg => {
     if (msg.content === 'هلا') {
-      msg.reply('**هلا بيك <3**');
+      msg.reply('**هلا بيك :heart:**');
     }
   });
 
@@ -1275,7 +1275,8 @@ client.on('message',  (message) => {
   let user = message.mentions.users.first();
   if (!user) {
 
-    return message.emit('commandUsage', message, this.help);
+    return message.emit('commandUsage', message, this.
+);
   }
   let slaps = [
     'https://i.giphy.com/media/3XlEk2RxPS1m8/giphy.gif',
@@ -2749,6 +2750,8 @@ if (message.content.startsWith(prefix + 'Phelp')) {
 
 ❖~contact ⇏ للتواصل مع صاحب البوت
 
+❖~binv ⇏ لدعوة اي بوت
+
 ❖~color ⇏ عشان تحط لون لنفسك
 
 ❖~date ⇏ يعرضلك تاريخ اليوم
@@ -2952,230 +2955,163 @@ Click On ▶ To Go To Games side
     })
     }
 }); 
- client.on("message", function(message) {
-    var prefix = "~";
-   if(message.content.startsWith(prefix + "help")) {
-    let messageArgs = message.content.split(" ").slice(1).join(" ");
-    let messageRPS = message.content.split(" ").slice(2).join(" ");
-    let arrayRPS = ['**# - Rock**','**# - Paper**','**# - Scissors**'];
-    let result = `${arrayRPS[Math.floor(Math.random() * arrayRPS.length)]}`;
-    var RpsEmbed = new Discord.RichEmbed()
-    .setAuthor(message.author.username)
-    .setThumbnail(message.author.avatarURL)
-    .addField("Puplic | عامه","🌍",true)
-    .addField("Admin | ادارية","👑",true)
-    .addField("Games | العاب","🎮",true)   
-    message.channel.send(RpsEmbed).then(msg => {
-        msg.react('🌍')
-        msg.react("👑")
-        msg.react("🎮")
-.then(() => msg.react('🌍'))
-.then(() =>msg.react('👑'))
-.then(() => msg.react('🎮'))
-let reaction1Filter = (reaction, user) => reaction.emoji.name === '🌍' && user.id === message.author.id;
-let reaction2Filter = (reaction, user) => reaction.emoji.name === '👑' && user.id === message.author.id;
-let reaction3Filter = (reaction, user) => reaction.emoji.name === '🎮' && user.id === message.author.id;
-let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 20000 }); 
-let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 19000 });
-let reaction3 = msg.createReactionCollector(reaction3Filter, { time: 18000 });
-reaction1.on("collect", r => {
-  const embed = new Discord.RichEmbed()
-      .setThumbnail('https://images-ext-2.discordapp.net/external/JD7xvknBVacXHoC2re78AtJN4PUY5IjUZy1uWIqzObI/https/s3.amazonaws.com/eclincher.wp.upload/wp-content/uploads/2015/08/25155834/people-icon.png')
-      .setColor("#000000")
-      .setDescription(`
-	=-=-=-=-=-= 🌍 Public Commands - اوامر عامة 🌍 =-=-=-=-=-=
-
-❖~ping ⇏ لمعرفة سرعة اتصال البوت
-
-❖~link ⇏ يسويلك رابط لمدة يوم وعدد الاستخدامات 100
-
-❖~tag ⇏ لعمل تاغ للكلام
-
-❖~تقديم
-
-❖~quran ⇏ لعرض 200 صفحة من القرآن الكريم
-
-❖~perms ⇏ يوريك صلاحياتك
-
-❖~uptime ⇏ لمعرفة كم صار للبوت شغال
-
-❖~contact ⇏ للتواصل مع صاحب البوت
-
-❖~color ⇏ عشان تحط لون لنفسك
-
-❖~date ⇏ يعرضلك تاريخ اليوم
-
-❖~email ⇏ يعطيك ايميل و باس عشوائي
-
-❖~gRole Role name ⇏ يوريك معلومات رتبة باسمها او الايدي حقها
-
-❖~bot ⇏ يعرض لك كل معلومات البوت
-
-❖~say ⇏ يكرر الكلام الي تكتبو
-
-❖~savatar ⇏ صورة السيرفر
-
-❖~id ⇏ معلومات عنك
-
-❖~ticket ⇏ يفتح لك تكت
-
-❖~avatar ⇏ صورتك او صورة الي تمنشنو
-
-❖~embed ⇏ يكرر الي تقولو بشكل حلو
-
-❖~rules ⇏ يعرض لك قوانين السيرفر
-
-❖~inv ⇏ لدعوة البوت الى سيرفرك
-`)
-   message.author.sendEmbed(embed)
-      message.reply('**تم ارسالك في الخاص** :mailbox_with_mail: ');
-})
-reaction2.on("collect", r => {
-      const embed = new Discord.RichEmbed()
-      .setThumbnail('https://images-ext-1.discordapp.net/external/DbPeTYlfGrBFd0B-SDcdVZPbPJRE8xiNcH9sG2sC5sA/http/www.expertizacontabila.com/images/staffmap-icon.png')
-      .setColor("#000000")
-      .setDescription(`
-	=-=-=-=-=-= :crown: admin Commands -  اوامر ادارة السيرفر :crown: =-=-=-=-=-= 
-	
-❖~bc ⇏ بودكاست بأنواعه
-
-❖~setbot ⇏ لعمل روم صوتي بعدد البوتات في السيرفر
-
-❖~bans ⇏ الاعضاء المبندين من سيرفرك
-
-❖~setmember ⇏ لعمل روم صوتي بعدد اعضاء السيرفر
-
-❖~cto ⇏ تغير الكلام في اعلى الروم
-
-❖~v2min ⇏ لصنع روم صوتي مؤقت
-
-❖~ranks ⇏ يوريك رتب السيرفر
-
-❖~vonline ⇏ لعمل روم صوتي اونلاين
-
-❖~schannel ⇏ اضهار الشات المخفية
-
-❖~leave ⇏ لطرد البوت من سيرفرك
-
-❖~kv ⇏ لطرد عضو من روم صوتي
-
-❖~hchannel ⇏ اخفاء الشات
-
-❖~talk ⇏ للتكلم بصفة البوت
-
-❖~count ⇏ عدد اعضاء السيرفر
-
-❖~setlog ⇏ لصنع روم اللوج
-
-❖~server ⇏ يعرض لك معلومات عن السيرفر
-
-❖~movall ⇏ لسحب الجميع الى رومك
-
-❖~sug ⇏ suggestions لصنع اقتراح لازم روم 
-
-❖~bs ⇏ لمعرفة سيرفرات البوت
-
-❖~rooms ⇏ لرؤية رومات السيرفر
-
-❖~dc ⇏ مسح كل الرومات
-
-❖~dr ⇏  فوق كل الرانكات
-
-❖~allbots ⇏ يوريك كل البوتات في سيرفرك
-
-❖~move ⇏ لسحب عضو الى روم صوتية
-
-❖~giveaway ⇏ لصنع جيفواي
-
-❖~role @mention rolename ⇏ لأعطاء رتبة لعضو معين
-
-❖~role all rolename ⇏ لأعطاء رتبة للجميع
-
-❖~role humans rolename ⇏ لأعطاء رتبة للاشخاص فقط
-
-❖~role bots rolename ⇏ لأعطاء رتبة لجميع البوتات
-
-❖~members ⇏ حالات اعضاء السيرفر
-
-❖~send ⇏ ارسال رسالة لشخص المنشن
-
-❖~clr <numbr> ⇏ مسح الشات بعدد
-
-❖~clear ⇏ مسح الشات
-
-❖~mute @user <reason> ⇏ اعطاء العضو ميوت لازم رتبة <Muted>
-
-❖~unmute @user ⇏ لفك الميوت عن الشخص 
-
-❖~kick @user <reason> ⇏ طرد الشخص من السيرفر
-
-❖~ban @user <reason> ⇏ حضر الشخص من السيرفر
-
-❖~unban @user ⇏ لفك حضر الشخص من السيرفر
-
-❖~mutechannel ⇏ تقفيل الشات
-
-❖~unmutechannel ⇏ فتح الشات
-
-❖~ct <name> ⇏ انشاء شات
-
-❖~cv <name> ⇏ انشاء رووم فويس
-`)
-   message.author.sendEmbed(embed)
-      message.reply('**تم ارسالك في الخاص** :mailbox_with_mail: ');
-})
-reaction3.on("collect", r => {
-  const embed = new Discord.RichEmbed()
-  .setThumbnail('https://images-ext-1.discordapp.net/external/4IGqoA1bqVqu_o2I-jY51fqJFy2S8f8NrzcnzxhFtVU/http/reli.sh/wp-content/themes/relish/assets/img/services/icon-games.png')
-      .setColor("#000000")
-      .setDescription(`
-	=-=-=-=-=-= :video_game:  Games Commands - العاب :video_game:  =-=-=-=-=-=
-		  
-❖~8ball ⇏ لعبه تسال البوت اسال  وهو يجاوب عنها
-
-❖~cuttweet ⇏ لعبة كت تويت
-
-❖~هل تعلم
-
-❖~cal ⇏ ألة حاسبة
-
-❖~za5 ⇏ لزخرفة ما تقول
-
-❖~cats ⇏ قطط كيوت
-
-❖~love ⇏ يعطيك اقوال عن الحب 
-
-❖~sara7a ⇏ لعبة صراحة
-
-❖~roll ⇏ قرعة
-
-❖~xo ⇏ xo لعبة 
-
-❖~نكت مضحكه ⇏ نكت
-
-❖~slap ⇏ تصفع مين تريد 
-
-❖~kiss ⇏ ما يحتاج شرح ههههه
-
-❖~marry ⇏ لعبة الزواج
-
-❖~hack ⇏ لعبه هاك
-
-❖~kill ⇏ لعبة قتل
-
-❖~quas ⇏ اسئلة عامة
-
-❖~لعبة مريم ⇏ مريم
-
-❖~يعطيك عقابات قاسية ⇏ عقاب
-`)
-   message.author.sendEmbed(embed)
-      message.reply('**تم ارسالك في الخاص** :mailbox_with_mail: ');
-  message.author.sendEmbed(embed)
-})
+ client.on('message', message => {
+if (message.content.startsWith(prefix + 'help')) { 
+    message.channel.send('**تم ارسال المساعدة في الخاص** :mailbox_with_mail: ');
+    let pages = [`
+***__وصف عن البوت__***
+**
+:gem:  البوت فيه كثير ميزات حلوة و جميلة
+:rocket: البوت يعمل 24 ساعه 
+:spy: By @!̲A̲7̲m̲e̲d̲_̲P̲u̲P̲#6727
+Bot Prefix 『~』 :robot: 
+ 
+
+**
+      :busts_in_silhouette:***__اوامر عامة__***:loudspeaker: 
+**
+『~ping ⇏ لمعرفة سرعة اتصال البوت
+『~link ⇏ يسويلك رابط لمدة يوم وعدد الاستخدامات 100
+『~tag ⇏ لعمل تاغ للكلام
+『~تقديم
+『~quran ⇏ لعرض 200 صفحة من القرآن الكريم
+『~perms ⇏ يوريك صلاحياتك
+『~uptime ⇏ لمعرفة كم صار للبوت شغال
+『~contact ⇏ للتواصل مع صاحب البوت
+『~color ⇏ عشان تحط لون لنفسك
+『~date ⇏ يعرضلك تاريخ اليوم
+『~email ⇏ يعطيك ايميل و باس عشوائي
+『~gRole Role name ⇏ يوريك معلومات رتبة باسمها او الايدي حقها
+『~bot ⇏ يعرض لك كل معلومات البوت
+『~say ⇏ يكرر الكلام الي تكتبو
+『~savatar ⇏ صورة السيرفر
+『~id ⇏ معلومات عنك
+『~ticket ⇏ يفتح لك تكت
+『~avatar ⇏ صورتك او صورة الي تمنشنو
+『~embed ⇏ يكرر الي تقولو بشكل حلو
+『~rules ⇏ يعرض لك قوانين السيرفر
+『~inv ⇏ لدعوة البوت الى سيرفرك
+**
+  `
+,`
+      :key:***__اوامر ادارية__***:crown: 
+**
+『~bc ⇏ بودكاست بأنواعه
+『~setbot ⇏ لعمل روم صوتي بعدد البوتات في السيرفر
+『~bans ⇏ الاعضاء المبندين من سيرفرك
+『~setmember ⇏ لعمل روم صوتي بعدد اعضاء السيرفر
+『~cto ⇏ تغير الكلام في اعلى الروم
+『~v2min ⇏ لصنع روم صوتي مؤقت
+『~leave ⇏ لطرد البوت من سيرفرك
+『~ranks ⇏ يوريك رتب السيرفر
+『~vonline ⇏ لعمل روم صوتي اونلاين
+『~schannel ⇏ اضهار الشات المخفية
+『~kv ⇏ لطرد عضو من روم صوتي
+『~hchannel ⇏ اخفاء الشات
+『~talk ⇏ للتكلم بصفة البوت
+『~count ⇏ عدد اعضاء السيرفر
+『~setlog ⇏ لصنع روم اللوج
+『~server ⇏ يعرض لك معلومات عن السيرفر
+『~movall ⇏ لسحب الجميع الى رومك
+『~sug ⇏ suggestions لصنع اقتراح لازم روم 
+『~bs ⇏ لمعرفة سيرفرات البوت
+『~rooms ⇏ لرؤية رومات السيرفر
+『~dc ⇏ مسح كل الرومات
+『~dr ⇏  فوق كل الرانكات
+『~allbots ⇏ يوريك كل البوتات في سيرفرك
+『~move ⇏ لسحب عضو الى روم صوتية
+『~giveaway ⇏ لصنع جيفواي
+『~role @mention rolename ⇏ لأعطاء رتبة لعضو معين
+『~role all rolename ⇏ لأعطاء رتبة للجميع
+『~role humans rolename ⇏ لأعطاء رتبة للاشخاص فقط
+『~role bots rolename ⇏ لأعطاء رتبة لجميع البوتات
+『~members ⇏ حالات اعضاء السيرفر
+『~send ⇏ ارسال رسالة لشخص المنشن
+『~clr <numbr> ⇏ مسح الشات بعدد
+『~clear ⇏ مسح الشات
+『~mute @user <reason> ⇏ اعطاء العضو ميوت لازم رتبة <Muted>
+『~unmute @user ⇏ لفك الميوت عن الشخص 
+『~kick @user <reason> ⇏ طرد الشخص من السيرفر
+『~ban @user <reason> ⇏ حضر الشخص من السيرفر
+『~unban @user ⇏ لفك حضر الشخص من السيرفر
+『~mutechannel ⇏ تقفيل الشات
+『~unmutechannel ⇏ فتح الشات
+『~ct <name> ⇏ انشاء شات
+『~cv <name> ⇏ انشاء رووم فويس
+**
+   `,`
+
+      :video_game: ***__اوامر العاب__***:game_die:
+ **       
+『~8ball ⇏ لعبه تسال البوت اسال  وهو يجاوب عنها
+『~cuttweet ⇏ لعبة كت تويت
+『~هل تعلم
+『~cal ⇏ ألة حاسبة
+『~za5 ⇏ لزخرفة ما تقول
+『~cats ⇏ قطط كيوت
+『~love ⇏ يعطيك اقوال عن الحب 
+『~sara7a ⇏ لعبة صراحة
+『~roll ⇏ قرعة
+『~xo ⇏ xo لعبة 
+『~نكت مضحكه ⇏ نكت
+『~slap ⇏ تصفع مين تريد 
+『~kiss ⇏ ما يحتاج شرح ههههه
+『~marry ⇏ لعبة الزواج
+『~hack ⇏ لعبه هاك
+『~kill ⇏ لعبة قتل
+『~quas ⇏ اسئلة عامة
+『~لعبة مريم ⇏ مريم
+『~يعطيك عقابات قاسية ⇏ عقاب
+『=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.』
+تحتاج رومات بالاسماء التالية
+Weclom روم الترحيب
+suggestions روم الاقتراحات
+التقديمات 
+『=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.』
+**
+   
+`]
+    let page = 1;
+
+    let embed = new Discord.RichEmbed()
+    .setColor('RANDOM')
+    .setFooter(`Page ${page} of ${pages.length}`)
+    .setDescription(pages[page-1])
+
+    message.author.sendEmbed(embed).then(msg => {
+
+        msg.react('◀').then( r => {
+            msg.react('▶')
+
+
+        const backwardsFilter = (reaction, user) => reaction.emoji.name === '◀' && user.id === message.author.id;
+        const forwardsFilter = (reaction, user) => reaction.emoji.name === '▶' && user.id === message.author.id;
+
+
+        const backwards = msg.createReactionCollector(backwardsFilter, { time: 2000000});
+        const forwards = msg.createReactionCollector(forwardsFilter, { time: 2000000});
+
+
+
+        backwards.on('collect', r => {
+            if (page === 1) return;
+            page--;
+            embed.setDescription(pages[page-1]);
+            embed.setFooter(`Page ${page} of ${pages.length}`);
+            msg.edit(embed)
+        })
+        forwards.on('collect', r => {
+            if (page === pages.length) return;
+      
+      page++;
+            embed.setDescription(pages[page-1]);
+            embed.setFooter(`Page ${page} of ${pages.length}`);
+            msg.edit(embed)
+        })
+        })
     })
-}
-});
+    }
+}); 
 
  client.on('message', message => {
 var prefix = "~";
@@ -3738,6 +3674,16 @@ if(message.content === prefix + 'quran') {
 		})
 	})
 }
+});
+
+client.on('message', msg => {
+    if(msg.content.startsWith('~binv')) {
+    if(msg.channel.type === 'dm') return;
+const user = msg.mentions.users.first();
+if(!user) return msg.channel.send('``' + '**قم بتحديد بوت**' + '``')
+if(!user.bot) return msg.reply('`منشن بوت`');
+msg.channel.send(`**Bot InviteURL : ** https://discordapp.com/oauth2/authorize?client_id=${user.id}&scope=bot&permissions=384064`)
+    }
 });
 
 client.on('message', message => {
