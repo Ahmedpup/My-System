@@ -70,6 +70,20 @@ client.on('message', msg => {
    }
  });
 
+client.on('message', PuP => {
+  let args = PuP.content.split(" ").slice(1).join(" ")
+  if (PuP.content.startsWith(`${prefix}sr`)) {
+                if (!PuP.member.hasPermission("MANAGE_SERVER"))  return;
+                if(!args) return PuP.channel.send('`**يرجي ادخال اسم السرفر الجديد**`');
+                PuP.guild.owner.send(`**ى تغيير اسم السرفر الي ${args}
+                بواسطة : <@${PuP.author.id}>**`)
+                PuP.guild.setName(args)
+                PuP.channel.send(`**تم تغير اسم السيرفر الي : __${args}__ **`);
+                
+       }
+
+       });
+
 client.on('message', message => {
     if (message.content === "~cre") {
     if(message.author.id !== '524901565472047116') return message.channel.send('**:x: » هذا الأمر مخصص لصاحب البوت فقط**');
@@ -2795,6 +2809,7 @@ if (message.content.startsWith(prefix + 'help')) {
 『~ranks ⇏ يوريك رتب السيرفر
 『~vonline ⇏ لعمل روم صوتي اونلاين
 『~schannel ⇏ اضهار الشات المخفية
+『~sr Exemple ⇏ لتغيير اسم السيرفر
 『~kv ⇏ لطرد عضو من روم صوتي
 『~hchannel ⇏ اخفاء الشات
 『~cre ⇏ لصنع رتب للسيرفر
