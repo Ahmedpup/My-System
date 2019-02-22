@@ -2,7 +2,10 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const moment = require('moment');
 const zalgo = require('zalgolize');
+const math = require('math-expression-evaluator');  
 const figlet = require('figlet'); 
+const fs = require('fs');
+const ms = require('ms');
 const prefix = '~'
 
 client.on('message', msg => {
@@ -2698,6 +2701,7 @@ if (message.content.startsWith(prefix + 'help')) {
 『~perms ⇏ يوريك صلاحياتك
 『~uptime ⇏ لمعرفة كم صار للبوت شغال
 『~credit ⇏ لمعرفة كم معك من الكريدتس
+『~hypixel ⇏ لرؤية احصائياتك في هايبكسل
 『~daily ⇏ لاخذ الدايلي
 『~contact ⇏ للتواصل مع صاحب البوت
 『~color ⇏ عشان تحط لون لنفسك
@@ -3740,8 +3744,17 @@ message.channel.awaitMessages(filte, { max: 1, time: 15000, errors: ['time'] })
     }
 })
 
- const fs = require('fs');
-const ms = require('ms');
+client.on('message', message => {
+  var prefix = "~"
+        if(message.content.startsWith(prefix + 'hypixel')) {
+            let args = message.content.split(' ').slice(1).join(' ');
+            if (!args) return message.channel.send("**Please provide a Minecraft username. ❌**");
+            var link = (`https://hypixel.net/player/${args}`);
+            message.channel.send(link);
+        }
+    });
+
+
 const cool = [];
 client.on('message',async message => {
   if(message.author.bot) return;
