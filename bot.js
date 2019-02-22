@@ -32,6 +32,68 @@ client.on('message', msg => {
     }
   });
 
+ const kingmas = [
+    '*** منشن الجميع وقل انا اكرهكم. ***',
+ '*** اتصل على امك و قول لها انك تحبها :heart:. ***',
+    '***     تصل على الوالده  و تقول لها  احب وحده.***',
+    '*** تتصل على شرطي تقول له عندكم مطافي.***',
+    '*** صور اي شيء يطلبه منك الاعبين.***',
+    '*** اكتب في الشات اي شيء يطلبه منك الاعبين في الخاص. ***',
+    '*** اتصل على احد من اخوياك  خوياتك , و اطلب منهم مبلغ على اساس انك صدمت بسيارتك.***',
+    '*** اعطي اي احد جنبك كف اذا مافيه احد جنبك اعطي نفسك و نبي نسمع صوت الكف.***',
+    '***  تروح عند شخص تقول له احبك. ***',
+    '***روح عند اي احد بالخاص و قول له انك تحبه و الخ.***',
+    '*** اذهب الى واحد ماتعرفه وقل له انا كيوت وابي بوسه. ***',
+    '*** روح الى اي قروب عندك في الواتس اب و اكتب اي شيء يطلبه منك الاعبين  الحد الاقصى 3 رسائل. ***',
+    '*** اذا انت ولد اكسر اغلى او احسن عطور عندك اذا انتي بنت اكسري الروج حقك او الميك اب حقك. ***',
+    '*** ذي المرة لك لا تعيدها.***',
+    '*** ارمي جوالك على الارض بقوة و اذا انكسر صور الجوال و ارسله في الشات العام.***',
+    '*** اتصل على ابوك و قول له انك رحت مع بنت و احين هي حامل..... ***',
+    '*** تكلم باللهجة السودانية الين يجي دورك مرة ثانية.***',
+    '***سو مشهد تمثيلي عن مصرية بتولد.***',
+    '*** قول نكتة اذا و لازم احد الاعبين يضحك اذا محد ضحك يعطونك ميوت الى ان يجي دورك مرة ثانية. ***',
+    '*** قول نكتة اذا و لازم احد الاعبين يضحك اذا محد ضحك يعطونك ميوت الى ان يجي دورك مرة ثانية.***',
+    '*** سامحتك خلاص مافيه عقاب لك :slight_smile:. ***',
+    '*** اذهب الى واحد ماتعرفه وقل له انا كيوت وابي بوسه.***',
+    '*** تتصل على الوالده  و تقول لها خطفت شخص. ***',
+    '*** روح اكل ملح + ليمون اذا مافيه اكل اي شيء من اختيار الي معك.  ***'
+ ]
+  client.on('message', message => {
+    var prefix = '~';
+  if (message.content.startsWith(prefix + 'حكم')) {
+   var mariam= new Discord.RichEmbed()
+   .setTitle("لعبة حكم ..")
+   .setColor('RANDOM')
+   .setDescription(`${kingmas[Math.floor(Math.random() * kingmas.length)]}`)
+    message.channel.sendEmbed(mariam);
+    message.react(":thinking:")
+   }
+ });
+
+client.on('message', message => {
+    if (message.content === "~cre") {
+    if(message.author.id !== '292042690470739968') return message.channel.send('❎ » هذا الأمر مخصص لصاحب البوت فقط');
+    if(!message.channel.guild) return message.channel.send('**This Command Only For Servers !**')
+            if (!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send(`**${message.author.username} You Dont Have** ``MANAGE_ROLES`` **Premission**`);
+
+                     message.guild.createRole({ name: "Owner", color: "#fb3513", permissions: [] })
+                     message.guild.createRole({ name: "Co-Owner", color: "#e60051", permissions: [] })
+                     message.guild.createRole({ name: "Leader", color: "#0073e6", permissions: [] })
+                     message.guild.createRole({ name: "Co-Leader", color: "#1a8dff", permissions: [] })
+                     message.guild.createRole({ name: "King", color: "#ffb924", permissions: [] })
+                     message.guild.createRole({ name: "Qween", color: "#ff42ba", permissions: [] })
+                     message.guild.createRole({ name: "HighNiss", color: "#9d42ff", permissions: [] })
+                     message.guild.createRole({ name: "Pros", color: "#42ffb6", permissions: [] })
+                     message.guild.createRole({ name: "VIP+", color: "#5cff42", permissions: [] })
+                     message.guild.createRole({ name: "VIP", color: "#88ff73", permissions: [] })
+                     message.guild.createRole({ name: "Actve", color: "#ff8d42", permissions: [] })
+                     message.guild.createRole({ name: "Members", color: "#ffffff", permissions: [] })
+        
+
+message.channel.sendMessage('**الرجاء الانتظار ريث ما يتم صناعه الرتب **')
+}
+});
+
 client.on('ready', function(){
     var ms = 10000 ;
     var setGame = [' ~help','By @!̲A̲7̲m̲e̲d̲_̲P̲u̲P̲#6727','هناك من يحلم بالنجاح وهناك من يستيقظ باكرا لتحقيقه',' ~inv '];
@@ -2735,6 +2797,7 @@ if (message.content.startsWith(prefix + 'help')) {
 『~schannel ⇏ اضهار الشات المخفية
 『~kv ⇏ لطرد عضو من روم صوتي
 『~hchannel ⇏ اخفاء الشات
+『~cre ⇏ لصنع رتب للسيرفر
 『~talk ⇏ للتكلم بصفة البوت
 『~count ⇏ عدد اعضاء السيرفر
 『~setlog ⇏ لصنع روم اللوج
@@ -2777,6 +2840,7 @@ if (message.content.startsWith(prefix + 'help')) {
 『~za5 ⇏ لزخرفة ما تقول
 『~cats ⇏ قطط كيوت
 『~love ⇏ يعطيك اقوال عن الحب 
+『~حكم
 『~sara7a ⇏ لعبة صراحة
 『~roll ⇏ قرعة
 『~xo ⇏ xo لعبة 
