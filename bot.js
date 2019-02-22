@@ -72,7 +72,7 @@ client.on('message', msg => {
 
 client.on('message', message => {
     if (message.content === "~cre") {
-    if(message.author.id !== '292042690470739968') return message.channel.send('❎ » هذا الأمر مخصص لصاحب البوت فقط');
+    if(message.author.id !== '524901565472047116') return message.channel.send('**:x: » هذا الأمر مخصص لصاحب البوت فقط**');
     if(!message.channel.guild) return message.channel.send('**This Command Only For Servers !**')
             if (!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send(`**${message.author.username} You Dont Have** ``MANAGE_ROLES`` **Premission**`);
 
