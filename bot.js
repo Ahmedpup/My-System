@@ -34,11 +34,7 @@ client.on('message', msg => {
     }
     });
   
-  client.on('message', msg => {
-    if (msg.content === 'هلا') {
-      msg.reply('**هلا بيك <3**');
-    }
-  });
+
 
  client.on("message", message => {
   if (message.channel.type === "dm") {  
