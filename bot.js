@@ -3608,14 +3608,14 @@ client.on('message', message => {
 });
 
 client.on('guildCreate', guild => {
-  client.channels.get("524901565472047116").send(`✅ **تم اضافة البوت في سيرفر جديد مبروكك
+  client.channels.get("524901565472047116").send(`**تم اضافة البوت في سيرفر جديد مبروكك
 Server name: __${guild.name}__
 Server owner: __${guild.owner}__
 Server id: __${guild.id}__ 
 Server Count: __${guild.memberCount}__**`)
 });
 client.on('guildDelete', guild => {
-  client.channels.get("524901565472047116").send(`❎ **طردوني حرام والله ايش سويت انا
+  client.channels.get("524901565472047116").send(`**طردوني حرام والله ايش سويت انا
 Server name: __${guild.name}__
 Server owner: __${guild.owner}__
 Server id: __${guild.id}__ 
