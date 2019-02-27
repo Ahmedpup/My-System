@@ -413,9 +413,9 @@ client.on("message", message => {
 
 client.on("message", (message) => {
 
-   if (message.content.startsWith("P.ticket")) {
+   if (message.content.startsWith("P.new")) {
         const reason = message.content.split(" ").slice(1).join(" ");
-        if (!message.guild.roles.exists("name", "Support Team")) return message.channel.send(`لازم تسوي رتبه اسمه Support Team`);
+        if (!message.guild.roles.exists("name", "Support Team")) return message.channel.send(`**تحتاج رتبة Support Team**`);
         if (message.guild.channels.exists("name", "ticket-{message.author.id}" + message.author.id)) return message.channel.send(`You already have a ticket open.`);  
         message.guild.createChannel(`ticket-${message.author.username}`, "text").then(c => {
             let role = message.guild.roles.find("name", "Support Team");
@@ -435,7 +435,7 @@ client.on("message", (message) => {
             message.channel.send(`:white_check_mark: **تم إنشاء تذكرتك ، #${c.name}.**`);
             const embed = new Discord.RichEmbed()
                 .setColor(0xCF40FA)
-                .addField(`مرحباّ ${message.author.username}!`, `يرجى محاولة شرح سبب فتح هذه التذكرة بأكبر قدر ممكن من التفاصيل. سيكون فريق الدعم لدينا قريبا للمساعدة.`)
+                .addField(`**مرحباّ ${message.author.username}!`, `يرجى محاولة شرح سبب فتح هذه التذكرة بأكبر قدر ممكن من التفاصيل. سيكون فريق الدعم لدينا قريبا للمساعدة.**`)
                 .setTimestamp();
             c.send({
                 embed: embed
@@ -447,7 +447,7 @@ client.on("message", (message) => {
   if (message.content.startsWith("P.close")) {
         if (!message.channel.name.startsWith(`ticket-`)) return message.channel.send(`You can't use the close command outside of a ticket channel.`);
  
-        message.channel.send(`هل أنت متأكد؟ بعد التأكيد ، لا يمكنك عكس هذا الإجراء!\n للتأكيد ، اكتب\`$confirm\`. سيؤدي ذلك إلى مهلة زمنية في غضون 10 ثوانٍ وإلغائها`)
+        message.channel.send(`**هل أنت متأكد؟ بعد التأكيد ، لا يمكنك عكس هذا الإجراء!\n للتأكيد ، اكتب\`$confirm\`. سيؤدي ذلك إلى مهلة زمنية في غضون 10 ثوانٍ وإلغائها**`)
             .then((m) => {
                 message.channel.awaitMessages(response => response.content === '$confirm', {
                         max: 1,
@@ -1432,7 +1432,9 @@ ${attentions[message.guild.id]['msg']}**`).then(msge => {
 
 	client.on('message', message=>{
     if (message.content ===  "P.leave"){
+    message.channel.send('**اوك باي :cry: **');
     message.guild.leave();
+
             }
 });
 
@@ -1442,7 +1444,7 @@ ${attentions[message.guild.id]['msg']}**`).then(msge => {
         .setTitle("**اضافه البوت لسيرفرك**") 
        .setDescription(`**📬 | اذا تريد البوت يرسلك الرابط بخاصك
        📇 | اذا تريد البوت يرسلك الرابط هنا بالشات
-	      |:heart: #شكرا لإطلاعك على هذه المعلومة#:heart:  **`)
+	      :heart: #شكرا لإطلاعك على هذه المعلومة#:heart:  **`)
         msg.channel.send(e).then(b => {
             b.react('📇')
             .then(() => b.react('📬'))
@@ -2853,7 +2855,7 @@ if (message.content.startsWith(prefix + 'help')) {
 『P.say ⇏ يكرر الكلام الي تكتبو
 『P.savatar ⇏ صورة السيرفر
 『P.id ⇏ معلومات عنك
-『P.ticket ⇏ يفتح لك تكت
+『P.new ⇏ يفتح لك تكت
 『P.avatar ⇏ صورتك او صورة الي تمنشنو
 『P.embed ⇏ يكرر الي تقولو بشكل حلو
 『P.rules ⇏ يعرض لك قوانين السيرفر
