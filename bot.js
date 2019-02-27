@@ -1432,7 +1432,7 @@ ${attentions[message.guild.id]['msg']}**`).then(msge => {
 
 	client.on('message', message=>{
     if (message.content ===  "P.leave"){
-    message.channel.send('**اوك باي :cry: **');
+    message.channel.send('** حسنا . معا السلامة :cry: **');
     message.guild.leave();
 
             }
