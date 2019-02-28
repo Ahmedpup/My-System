@@ -3335,10 +3335,10 @@ if (message.content.startsWith(prefix + 'help')) {
 『P.تقديم
 『P.quran ⇏ لعرض 200 صفحة من القرآن الكريم
 『P.perms ⇏ يوريك صلاحياتك
-『P.report ⇏ للابلاغ عن احد
 『P.hypixel ⇏ لرؤية احصائياتك في هايبكسل
 『P.contact ⇏ للتواصل مع صاحب البوت
 『P.clan ⇏ لعبة الكلانات
+『P.report ⇏ للابلاغ عن احد
 『P.color ⇏ عشان تحط لون لنفسك
 『P.emojilist ⇏ لرؤية قائمة اموجيات السيرفر
 『P.date ⇏ يعرضلك تاريخ اليوم
@@ -4339,7 +4339,24 @@ client.on('message', function(message) {
 message.channel.send(Rembed)
 message.channel.send("__Are you sure you want to send this to the Server owner??__").then(msg => {
     msg.react("✅")
-    msg.
+    msg.react("❌")
+.then(() => msg.react('❌'))
+.then(() =>msg.react('✅'))
+let reaction1Filter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
+let reaction2Filter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
+
+let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
+let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
+reaction1.on("collect", r => {
+    message.guild.owner.send(Rembed)
+    message.reply("**# - Done! 🎇**");
+})
+reaction2.on("collect", r => {
+    message.reply("**# - Canceled!**");
+})
+})
+}
+});
 
 
 
