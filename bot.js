@@ -435,7 +435,7 @@ client.on("message", (message) => {
             message.channel.send(`:white_check_mark: **تم إنشاء تذكرتك ، #${c.name}.**`);
             const embed = new Discord.RichEmbed()
                 .setColor(0xCF40FA)
-                .addField(`**مرحباّ ${message.author.username}!`, `نرجو منك شرح سبب فتحك لهذه التذكرة لحين التواصل معك من قبل الاداة. اذا ارت اغلاق التذكرة استعمل الامر P.close**`)
+                .addField(`**مرحباّ ${message.author.username}!`, `نرجو منك شرح سبب فتح هذه التذكرة . الى حين التواصل معك من قبل الادارة . P.close اذا اردت اغلاق هذه التذكرة**`)
                 .setTimestamp();
             c.send({
                 embed: embed
