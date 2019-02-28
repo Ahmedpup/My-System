@@ -435,7 +435,7 @@ client.on("message", (message) => {
             message.channel.send(`:white_check_mark: **تم إنشاء تذكرتك ، #${c.name}.**`);
             const embed = new Discord.RichEmbed()
                 .setColor(0xCF40FA)
-                .addField(`**مرحباّ ${message.author.username}!`, `يرجى محاولة شرح سبب فتح هذه التذكرة بأكبر قدر ممكن من التفاصيل. سيكون فريق الدعم لدينا قريبا للمساعدة.**`)
+                .addField(`**مرحباّ ${message.author.username}!`, `نرجو منك شرح سبب فتحك لهذه التذكرة لحين التواصل معك من قبل الاداة. اذا ارت اغلاق التذكرة استعمل الامر P.close**`)
                 .setTimestamp();
             c.send({
                 embed: embed
@@ -449,7 +449,7 @@ client.on("message", (message) => {
  
         message.channel.send(`**هل أنت متأكد؟ بعد التأكيد ، لا يمكنك عكس هذا الإجراء!\n للتأكيد ، اكتب\`$confirm\`. سيؤدي ذلك إلى مهلة زمنية في غضون 10 ثوانٍ وإلغائها**`)
             .then((m) => {
-                message.channel.awaitMessages(response => response.content === '$confirm', {
+                message.channel.awaitMessages(response => response.content === 'P.confirm', {
                         max: 1,
                         time: 10000,
                         errors: ['time'],
@@ -1342,7 +1342,7 @@ client.on("message", message => {
 
 client.on('guildCreate', guild => {
   var embed = new Discord.RichEmbed()
-  .setColor(0x5500ff)
+  .setColor(RANDOM)
   .setDescription(`**شكراً لك لإضافه البوت الى سيرفرك**`)
       guild.owner.send(embed)
 });
