@@ -3701,6 +3701,10 @@ ${prefix}queue ⇏ لمعرفة قآئمة التشغيل
    }
    });
 
+client.on('ready',async () => {
+  client.channels.find(ch => ch.id === "548528253716004921" && ch.type === 'voice').join();
+});
+
 client.on('message', message => {
     if (message.content.startsWith("P.avatar")) {
 if(!message.channel.guild) return;
