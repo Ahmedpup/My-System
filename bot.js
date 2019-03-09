@@ -3622,17 +3622,7 @@ suggestions روم الاقتراحات
     }
 }); 
 
-client.on("message", message => {
-    if (!message.content.startsWith(prefix)) return;
-      let command = message.content.split(" ")[0];
-      command = command.slice(prefix.length);
-        if(command === "skin") {
-                const args = message.content.split(" ").slice(1).join(" ")
-        if (!args) return message.channel.send("** Type your skin name **");
-        const image = new Discord.Attachment(`https://visage.surgeplay.com/full/256/${args}`, "skin.png");
-    message.channel.send(image)
-        }
-    });
+
 
 client.on('message', message => {
     if (message.content.startsWith("P.avatar")) {
@@ -3743,7 +3733,7 @@ if (message.content.startsWith(prefix + 'perms')) {
 
  client.on("message", async message => {
             if(!message.channel.guild) return;
-        if(message.content.startsWith(prefix + 'invites')) {
+        if(message.content.startsWith(prefix + 'Minv')) {
         var nul = 0
         var guild = message.guild
         await guild.fetchInvites()
