@@ -684,7 +684,7 @@ client.on('message', PuP => {
 
 client.on('ready', function(){
     var ms = 10000 ;
-    var setGame = [' P.help','By @!̲A̲7̲m̲e̲d̲_̲P̲u̲P̲#6727',`${client.users.size} Members`,'هناك من يحلم بالنجاح وهناك من يستيقظ باكرا لتحقيقه',' P.inv '];
+    var setGame = [' P.help',`Im on ${client.guilds.size} servers`,`i help ${client.users.size} Members`,'The Best, For The Best',' P.inv '];
     var i = -1;
     var j = 0;
     setInterval(function (){
@@ -3473,15 +3473,17 @@ if (message.content.startsWith(prefix + 'help')) {
 **
 『P.ping ⇏ لمعرفة سرعة اتصال البوت
 『P.link ⇏ يسويلك رابط لمدة يوم وعدد الاستخدامات 100
-『P.tag ⇏ لعمل تاغ للكلام
+『P.tag ⇏ لعرض الكلام بشكل جميل و كبير
 『P.تقديم
 『P.quran ⇏ لعرض 200 صفحة من القرآن الكريم
-『P.perms ⇏ يوريك صلاحياتك
+『P.perms ⇏ لعرض صلاحياتك
+『P.topinv ⇏ لعرض صاحب اكثر دعوات 
 『P.hypixel ⇏ لرؤية احصائياتك في هايبكسل
 『P.contact ⇏ للتواصل مع صاحب البوت
 『P.clan ⇏ لعبة الكلانات
 『P.report ⇏ للابلاغ عن احد
-『P.color ⇏ عشان تحط لون لنفسك
+『P.Minv ⇏ لمعرفة عدد دعواتك
+『P.color ⇏ لوضع لون لك
 『P.emojilist ⇏ لرؤية قائمة اموجيات السيرفر
 『P.date ⇏ يعرضلك تاريخ اليوم
 『P.email ⇏ يعطيك ايميل و باس عشوائي
@@ -3572,7 +3574,8 @@ if (message.content.startsWith(prefix + 'help')) {
 تحتاج رومات بالاسماء التالية
 Weclom روم الترحيب
 suggestions روم الاقتراحات
-التقديمات 
+روم التقديمات 
+روم التوديع leave 
 『=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.』
 **
    
@@ -3619,7 +3622,17 @@ suggestions روم الاقتراحات
     }
 }); 
 
-
+client.on("message", message => {
+    if (!message.content.startsWith(prefix)) return;
+      let command = message.content.split(" ")[0];
+      command = command.slice(prefix.length);
+        if(command === "skin") {
+                const args = message.content.split(" ").slice(1).join(" ")
+        if (!args) return message.channel.send("** Type your skin name **");
+        const image = new Discord.Attachment(`https://visage.surgeplay.com/full/256/${args}`, "skin.png");
+    message.channel.send(image)
+        }
+    });
 
 client.on('message', message => {
     if (message.content.startsWith("P.avatar")) {
@@ -3728,13 +3741,72 @@ if (message.content.startsWith(prefix + 'perms')) {
 });
 
 
+ client.on("message", async message => {
+            if(!message.channel.guild) return;
+        if(message.content.startsWith(prefix + 'invites')) {
+        var nul = 0
+        var guild = message.guild
+        await guild.fetchInvites()
+            .then(invites => {
+             invites.forEach(invite => {
+                if (invite.inviter === message.author) {
+                     nul+=invite.uses
+                    }
+                });
+            });
+          if (nul > 0) {
+              console.log(`\n${message.author.tag} has ${nul} invites in ${guild.name}\n`)
+              var embed = new Discord.RichEmbed()
+                  .setColor("#000000")
+                    .addField(`${message.author.username}`, `لقد قمت بدعوة **${nul}** شخص`)
+                          message.channel.send({ embed: embed });
+                      return;
+                    } else {
+                       var embed = new Discord.RichEmbed()
+                        .setColor("#000000")
+                        .addField(`${message.author.username}`, `لم تقم بدعوة أي شخص لهذة السيرفر`)
 
+                       message.channel.send({ embed: embed });
+                        return;
+                    }
+        }
+        if(message.content.startsWith(prefix + 'invite-codes')) {
+let guild = message.guild
+var codes = [""]
+message.channel.send(":postbox: **لقد قمت بأرسال جميع روابط الدعوات التي قمت بأنشائها في الخاص**")
+guild.fetchInvites()
+.then(invites => {
+invites.forEach(invite => {
+if (invite.inviter === message.author) {
+codes.push(`discord.gg/${invite.code}`)
+}
+})
+}).then(m => {
+if (codes.length < 0) {
+    var embed = new Discord.RichEmbed()
+.setColor("#000000")
+.addField(`Your invite codes in ${message.guild.name}`, `You currently don't have any active invites! Please create an invite and start inviting, then you will be able to see your codes here!`)
+message.author.send({ embed: embed });
+return;
+} else {
+    var embed = new Discord.RichEmbed()
+.setColor("#000000")
+.addField(`Your invite codes in ${message.guild.name}`, `Invite Codes:\n${codes.join("\n")}`)
+message.author.send({ embed: embed });
+return;
+}
+})
+}
+
+});
 
 
 client.on('message', message => {
 if(message.author.bot) return;
 if(message.channel.type === 'dm') return;
     if(message.content.startsWith(prefix + 'bc')) {
+if(!message.member.hasPermission('ADMINISTRATOR')) return
+message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
      let filter = m => m.author.id === message.author.id;
  
  let recembed = new Discord.RichEmbed()
@@ -4150,6 +4222,33 @@ message.guild.members.filter(m => m.presence.status === 'online').forEach(m => {
      })
  })
     }});
+
+client.on('message',message =>{
+    if(message.content.startsWith(prefix + 'topinv')) {
+  message.guild.fetchInvites().then(i =>{
+  var invites = [];
+   
+  i.forEach(inv =>{
+    var [invs,i]=[{},null];
+     
+    if(inv.maxUses){
+        invs[inv.code] =+ inv.uses+"/"+inv.maxUses;
+    }else{
+        invs[inv.code] =+ inv.uses;
+    }
+        invites.push(`invite: ${inv.url} inviter: ${inv.inviter} \`${invs[inv.code]}\`;`);
+   
+  });
+  var embed = new Discord.RichEmbed()
+  .setColor("#000000")
+  .setDescription(`${invites.join(`\n`)+'\n\n**By:** '+message.author}`)
+  .setThumbnail("https://cdn.discordapp.com/attachments/442414506430169098/489929808244113409/JPEG_20180913_232108.jpg")
+           message.channel.send({ embed: embed });
+   
+  });
+   
+    }
+  });
 
 client.on('message',async message => {
     if(message.content.startsWith(prefix + "setmember")) {
