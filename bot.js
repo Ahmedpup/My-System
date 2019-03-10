@@ -3626,11 +3626,11 @@ client.on('message', message => {
         if (!message.guild) return;
         let Room = message.guild.channels.find(`name`, 'قبول-رفض');
         let user = message.mentions.users.first();
-        let embedreject = new Discord.RichEmbed()/
-        .setColor('RANDOM')
-        .setAuthor(user.username,user.avatarURL)
-        .setTitle('» `لم يتم قبولك كإداري` :x: ')
-        .setThumbnail(message.author.avatarURL)
+        let embedreject = new Discord.RichEmbed()
+        setColor('RANDOM')
+        setAuthor(user.username,user.avatarURL)
+        setTitle('» `لم يتم قبولك كإداري` :x: ')
+        setThumbnail(message.author.avatarURL)
         Room.sendEmbed(embedreject);
     }
 });
