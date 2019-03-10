@@ -1646,7 +1646,21 @@ client.on('voiceStateUpdate', (voiceOld, voiceNew) => {
     }  
 }); 
 
-
+client.on('message', message => {
+    var prefix = 'P.';
+    if (message.content.startsWith(prefix + 'accept')) {
+        if (message.author.bot) return;
+        if (!message.guild) return;
+        let Room = message.guild.channels.find(`name`, 'accept-denied');
+        let user = message.mentions.users.first();
+        let embedreject = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .setAuthor(user.username,user.avatarURL)
+        .setTitle('» `تم قبولك كإداري` :white_check_mark:  ')
+        .setThumbnail(message.author.avatarURL)
+        Room.sendEmbed(embedreject);
+    }
+});
 
 client.on("message", msg => {
   if(msg.content === 'P.' + "id") {
@@ -1973,12 +1987,6 @@ client.on("message", message => {
       }
   });
 
-client.on('guildCreate', guild => {
-  var embed = new Discord.RichEmbed()
-  .setColor(0x5500ff)
-  .setDescription(`**شكراً لك لإضافه البوت الى سيرفرك**`)
-      guild.owner.send(embed)
-});
 
 client.on("message", message => { 
               var args = message.content.substring(prefix.length).split(" ");
@@ -3087,12 +3095,6 @@ omar.reply("✅ `Success Deleted All Roles - Ranks`")
 }
 });
    
-   client.on('guildCreate', guild => {
-    var embed = new Discord.RichEmbed()
-    .setColor(0x5500ff)
-    .setDescription(`**شكراً لك لإضافه البوت الى سيرفرك**`)
-        guild.owner.send(embed)
-  });
 
    client.on('message',async message => {
 	
@@ -3101,7 +3103,7 @@ omar.reply("✅ `Success Deleted All Roles - Ranks`")
 if(!message.channel.guild) return message.reply(' ');
  
  
-  let submite = message.guild.channels.find(`name`, "تقديمات");
+  let submite = message.guild.channels.find(`name`, "التقديمات");
  
   if(!submite) return message.channel.send("❌لم اجد الروم الخاص بالتقديمات");
  
@@ -3537,6 +3539,7 @@ if (message.content.startsWith(prefix + 'help')) {
 『P.send ⇏ ارسال رسالة لشخص المنشن
 『P.clr <numbr> ⇏ مسح الشات بعدد
 『P.clear ⇏ مسح الشات
+『P.accept/deny ⇏ قبول او رفض التقديمات
 『P.mute @user <reason> ⇏ اعطاء العضو ميوت لازم رتبة <Muted>
 『P.unmute @user ⇏ لفك الميوت عن الشخص 
 『P.kick @user <reason> ⇏ طرد الشخص من السيرفر
@@ -3574,8 +3577,9 @@ if (message.content.startsWith(prefix + 'help')) {
 تحتاج رومات بالاسماء التالية
 Weclom روم الترحيب
 suggestions روم الاقتراحات
-روم التقديمات 
-روم التوديع leave 
+'روم 'التقديمات 
+'قبول-رفض' 
+روم التوديع leave
 『=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.』
 **
    
@@ -3622,7 +3626,20 @@ suggestions روم الاقتراحات
     }
 }); 
 
-
+client.on('message', message => {
+    if (message.content.startsWith(prefix + 'deny')) {
+        if (message.author.bot) return;
+        if (!message.guild) return;
+        let Room = message.guild.channels.find(`name`, 'قبول-رفض');
+        let user = message.mentions.users.first();
+        let embedreject = new Discord.RichEmbed()/
+        .setColor('RANDOM')//
+        .setAuthor(user.username,user.avatarURL)
+        .setTitle('» `لم يتم قبولك كإداري` :x: ')
+        .setThumbnail(message.author.avatarURL)
+        Room.sendEmbed(embedreject);
+    }
+});
 
 client.on('message', message => {
     if (message.content.startsWith("P.avatar")) {
