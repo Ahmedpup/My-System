@@ -3658,7 +3658,7 @@ reaction1.on("collect", r => {
 })
 reaction2.on("collect", r => {
       const embed = new Discord.RichEmbed()
-      .setThumbnail('https://images-ext-1.discordapp.net/external/DbPeTYlfGrBFd0B-SDcdVZPbPJRE8xiNcH9sG2sC5sA/http/www.expertizacontabila.com/images/staffmap-icon.png')
+  .setThumbnail('https://cdn.discordapp.com/attachments/553862087382925313/556036868492230667/logo-admin-png-4.png')
       .setColor("#000000")
       .setDescription(`
       :key:***__اوامر ادارية__***:crown: 
@@ -3752,7 +3752,6 @@ reaction3.on("collect", r => {
 })
 reaction3.on("collect", r => {
   const embed = new Discord.RichEmbed()
-  .setThumbnail('https://cdn.discordapp.com/attachments/553862087382925313/556036868492230667/logo-admin-png-4.png')
       .setColor("#000000")
       .setDescription(`
             -=- الرومات اللازمة للبوت -=-
