@@ -829,7 +829,7 @@ message.channel.sendEmbed(embed)
  });
 
 client.on('message', PuP => {
-  let args = Pu$content.split(" ").slice(1).join(" ")
+  let args = PuP.content.split(" ").slice(1).join(" ")
   if (Pu$content.startsWith(`${prefix}sr`)) {
                 if (!Pu$member.hasPermission("MANAGE_SERVER"))  return;
                 if(!args) return Pu$channel.send('`**يرجي ادخال اسم السرفر الجديد**`');
