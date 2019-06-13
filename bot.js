@@ -830,13 +830,13 @@ message.channel.sendEmbed(embed)
 
 client.on('message', PuP => {
   let args = PuP.content.split(" ").slice(1).join(" ")
-  if (Pu$content.startsWith(`${prefix}sr`)) {
-                if (!Pu$member.hasPermission("MANAGE_SERVER"))  return;
-                if(!args) return Pu$channel.send('`**يرجي ادخال اسم السرفر الجديد**`');
-                Pu$guild.owner.send(`**ى تغيير اسم السرفر الي ${args}
-                بواسطة : <@${Pu$author.id}>**`)
-                Pu$guild.setName(args)
-                Pu$channel.send(`**تم تغير اسم السيرفر الي : __${args}__ **`);
+  if (PuP.content.startsWith(`${prefix}sr`)) {
+                if (!PuP.member.hasPermission("MANAGE_SERVER"))  return;
+                if(!args) return PuP.channel.send('`**يرجي ادخال اسم السرفر الجديد**`');
+                PuP.guild.owner.send(`**ى تغيير اسم السرفر الي ${args}
+                بواسطة : <@${PuP.author.id}>**`)
+                PuP.guild.setName(args)
+                PuP.channel.send(`**تم تغير اسم السيرفر الي : __${args}__ **`);
                 
        }
 
