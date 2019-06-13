@@ -671,22 +671,7 @@ client.on('message', message => {
     }
 })
 
-client.on('message', ra3d => {
-var prefix = "$";
-                        let args = ra3d.content.split(" ").slice(1).join(" ")
-if(ra3d.content.startsWith(prefix + 'ccolors')) {
-    if(!args) return ra3d.channel.send('`يرجي اختيار كم لون `');
-             if (!ra3d.member.hasPermission('MANAGE_ROLES')) return ra3d.channel.sendMessage('`**⚠ | `[MANAGE_ROLES]` لا يوجد لديك صلاحية**'); 
-              ra3d.channel.send(`**✅ |Created __${args}__ Colors**`);
-                  setInterval(function(){})
-                    let count = 0;
-                    let ecount = 0;
-          for(let x = 1; x < `${parseInt(args)+1}`; x++){
-            ra3d.guild.createRole({name:x,
-              color: 'RANDOM'})
-              }
-            }
-       });
+
 
 const pics = JSON.parse(fs.readFileSync('./pics.json' , 'utf8'));
  client.on('message', message => {
@@ -892,7 +877,7 @@ var prefix = "$";
              message.channel.overwritePermissions(message.guild.id, {
              READ_MESSAGES: false
  })
-              message.channel.send('Channel Hided Successfully ! :white_check_mark:  ')
+              message.channel.send('تم اخفاء الشات بنجاح ! :white_check_mark:  ')
  }
 });
 
@@ -3549,6 +3534,7 @@ ${prefix}clan لعرض اوامر الكلانات
 『$clan ====> لعبة الكلانات
 『$report ====> للابلاغ عن احد
 『$Minv ====> لمعرفة عدد دعواتك
+『$colors ====> لعرض قائمة الالوان
 『$color ====> لوضع لون لك
 『$emojilist ====> لرؤية قائمة اموجيات السيرفر
 『$date ====> يعرضلك تاريخ اليوم
@@ -3571,7 +3557,7 @@ ${prefix}clan لعرض اوامر الكلانات
    }
    }); 
    
-   
+
    
  client.on("message", message => {
 	var prefix = "$";
@@ -3597,7 +3583,7 @@ ${prefix}clan لعرض اوامر الكلانات
 『$hchannel ====> اخفاء الشات
 『$talk ====> للتكلم بصفة البوت
 『$count ====> عدد اعضاء السيرفر
-『$ccolors <numbr> ====>لصنع الالوان بعدد
+『$ccolors ====> لصنع 50 لون
 『$setlog ====> لصنع روم اللوج
 『$server ====> يعرض لك معلومات عن السيرفر
 『$movall ====> لسحب الجميع الى رومك
@@ -3818,7 +3804,7 @@ if    (!(message.guild.roles.find("name",`${args}`))) return  message.channel.se
 const embed = new Discord.RichEmbed()
                     
      .setFooter('Requested by '+message.author.username, message.author.avatarURL)
-   .setDescription(`**Color Changed To Successfully** :white_check_mark: `)
+   .setDescription(`**تم تغيير لونك بنجاح** :white_check_mark: `)
  
    .setColor(`${a.hexColor}`)
   message.channel.sendEmbed(embed);
@@ -3836,6 +3822,81 @@ setInterval(function(){})
             
     }
 });   
+
+client.on('message', message => {
+  if(message.content === prefix + 'colors') {
+  if(!message.channel.guild) return message.channel.send('**This Commnad only For Servers !**');
+let menu = new Discord.RichEmbed()
+.setImage('https://www6.0zz0.com/2019/05/22/14/265175773.png')
+.setFooter('قائمة الالوان')
+message.channel.sendEmbed(menu)
+}})
+ 
+ 
+client.on('message', function(message) {
+    if(!message.channel.guild) return;
+    if(message.content === '$ccolors') {
+    if(message.member.hasPermission('MANAGE_ROLES')) {
+    setInterval(function(){})
+    message.channel.send('يتم صناعة 50 لون| ▶️')
+    }else{
+    message.channel.send('ليست لديك الصلاحيات الكافية|❌🚫')
+    }
+    }
+    });
+   
+    client.on('message', message=>{
+    if (message.content === '$ccolors'){
+    if(!message.channel.guild) return;
+    if (message.member.hasPermission('MANAGE_ROLES')){
+    setInterval(function(){})
+    let count = 0;
+    let ecount = 0;
+    for(let x = 1; x < 50; x++){
+    message.guild.createRole({name:x,
+    color: 'RANDOM'})
+    }
+    }
+    }
+    });
+ 
+client.on('message', message => {
+            let args = message.content.split(' ').slice(1);
+            if(message.content.split(' ')[0] == `${prefix}color`){
+            const embedd = new Discord.RichEmbed()
+            .setFooter('Requested by '+message.author.username, message.author.avatarURL)
+            .setDescription(`**لا يوجد لون بهاذا الاسم ؟ ❌**`)
+            .setColor(`ff0000`)
+           
+            if(!isNaN(args) && args.length > 0)
+           
+           
+            if    (!(message.guild.roles.find("name",`${args}`))) return  message.channel.sendEmbed(embedd);
+           
+           
+            var a = message.guild.roles.find("name",`${args}`)
+             if(!a)return;
+            const embed = new Discord.RichEmbed()
+           
+            .setFooter('Requested by '+message.author.username, message.author.avatarURL)
+            .setDescription(`**Done , Your color has changed . ✅ **`)
+           
+            .setColor(`${a.hexColor}`)
+            message.channel.sendEmbed(embed);
+            if (!args)return;
+            setInterval(function(){})
+               let count = 0;
+               let ecount = 0;
+            for(let x = 1; x < 201; x++){
+           
+            message.member.removeRole(message.guild.roles.find("name",`${x}`))
+           
+            }
+             message.member.addRole(message.guild.roles.find("name",`${args}`));
+           
+           
+            }
+            });
 
 client.on('message', message => {
     if (message.content.startsWith("$avatar")) {
@@ -3858,10 +3919,10 @@ client.on('message', message => {
    if(!message.channel.guild) return;
 if(message.content.startsWith(prefix + 'clear')) {
 if(!message.channel.guild) return message.channel.send('**This Command is Just For Servers**').then(m => m.delete(5000));
-if(!message.member.hasPermission('MANAGE_MESSAGES')) return      message.channel.send('**You Do not have permission** `MANAGE_MESSAGES`' );
+if(!message.member.hasPermission('MANAGE_MESSAGES')) return      message.channel.send('**ليست لديك الصلاحيات الكافية** `MANAGE_MESSAGES`' );
 let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
 let request = `Requested By ${message.author.username}`;
-message.channel.send(`**Are You sure you want to clear the chat?**`).then(msg => {
+message.channel.send(`**هل انت متأكد من مسح الشات ؟**`).then(msg => {
 msg.react('✅')
 .then(() => msg.react('❌'))
 .then(() =>msg.react('✅'))
@@ -3872,13 +3933,13 @@ let reaction2Filter = (reaction, user) => reaction.emoji.name === '❌' && user.
 let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
 let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
 reaction1.on("collect", r => {
-message.channel.send(`Chat will delete`).then(m => m.delete(5000));
+message.channel.send(`سيتم مسح الشات`).then(m => m.delete(5000));
 var msg;
         msg = parseInt();
 
       message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
       message.channel.sendMessage("", {embed: {
-        title: "`` Chat Deleted ``",
+        title: "`` تم مسح الشات ``",
         color: 0x06DF00,
         footer: {
 
@@ -4687,43 +4748,7 @@ if (msg.content.split(" ")[0].toLowerCase() === "$cr") {
             }
 });
 
-client.on('message', message => {
-          let args = message.content.split(' ').slice(1);
-   if(message.content.split(' ')[0] == '$color'){
-           const embedd = new Discord.RichEmbed()
-     .setFooter('Requested by '+message.author.username, message.author.avatarURL)
-   .setDescription(`**There's No Color With This Number ** :x: `)
-   .setColor(`ff0000`)
 
-    if(!isNaN(args) && args.length > 0)
-    
-
-if    (!(message.guild.roles.find("name",`${args}`))) return  message.channel.sendEmbed(embedd);
-
-
-       var a = message.guild.roles.find("name",`${args}`)
-                if(!a)return;
-const embed = new Discord.RichEmbed()
-                    
-     .setFooter('Requested by '+message.author.username, message.author.avatarURL)
-   .setDescription(`**Color Changed To Successfully** :white_check_mark: `)
- 
-   .setColor(`${a.hexColor}`)
-  message.channel.sendEmbed(embed);
-          if (!args)return;
-setInterval(function(){})
-                  let count = 0;
-                  let ecount = 0;
-        for(let x = 1; x < 201; x++){
-           
-            message.member.removeRole(message.guild.roles.find("name",`${x}`))
-          
-            }
-                message.member.addRole(message.guild.roles.find("name",`${args}`));
-        
-            
-    }
-});
 
 client.on('message', message => {
     if (message.content.startsWith(prefix + 'sug')) {
@@ -4747,6 +4772,8 @@ client.on('message', message => {
        )
    }
 });
+
+
 
 client.on('message', message => {
     if (message.author.bot) return;
