@@ -3879,7 +3879,7 @@ client.on('message', message => {
             const embed = new Discord.RichEmbed()
            
             .setFooter('Requested by '+message.author.username, message.author.avatarURL)
-            .setDescription(`**Done , Your color has changed . ✅ **`)
+            .setDescription(`**تم تغيير لونك بنجاح  ✅ **`)
            
             .setColor(`${a.hexColor}`)
             message.channel.sendEmbed(embed);
