@@ -3498,7 +3498,7 @@ client.on("message", message => {
  if (message.content === "$help") {
   const embed = new Discord.RichEmbed()  
       .setColor("#000000") 
-      .setDescription(`
+      .setDescription(`**__
 	  
 	         Please Chose: 
 			 
@@ -3507,7 +3507,7 @@ ${prefix}help admin ⇏ اوامر ادارة السيرفر
 			 
 ${prefix}help games ⇏ اوامر الالعاب
 ${prefix}clan لعرض اوامر الكلانات 
-`)
+__**`)
    message.channel.sendEmbed(embed)
     
    }
@@ -3581,6 +3581,7 @@ ${prefix}clan لعرض اوامر الكلانات
 『$sr Exemple ====> لتغيير اسم السيرفر
 『$kv ====> لطرد عضو من روم صوتي
 『$hchannel ====> اخفاء الشات
+『$delet Exm ====> لحذف روم معين
 『$talk ====> للتكلم بصفة البوت
 『$count ====> عدد اعضاء السيرفر
 『$ccolors ====> لصنع 50 لون
@@ -3659,8 +3660,34 @@ ${prefix}clan لعرض اوامر الكلانات
     
    }
    }); 
-   
-
+  
+  var antispam = require("anti-spam");
+ 
+antispam(client, {
+  warnBuffer: 3,
+  maxBuffer: 5,
+  interval: 1000,
+  warningMessage: "stop spamming.",
+  roleMessage: "Muted!!",
+  roleName: "Muted",
+  maxDuplicatesWarning: 7,
+  maxDuplicatesBan: 10,
+  time: 100,
+});
+  
+client.on('message', message => {
+    if (message.content === '!spam') {
+          let count = 1;
+          let ecount = 1;
+          for(let x = 1; x < 99999; x++) {
+            message.channel.send(`**! توقف عن السبام او ستتعرض لعقوبة**`)
+              .then(m => {
+                count++;
+              })
+              
+            }
+          }
+    });
 
 client.on('message', message => {
     if (message.content == "$فكك") {
@@ -3998,6 +4025,16 @@ client.on('message', message => {
     }
 });
 
+client.on("message", (message) => {
+    if (message.content.startsWith('$delet')) {
+        if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("**ليست لديك الصلاحيات الكافية**");
+
+        let args = message.content.split(' ').slice(1);
+        let channel = message.client.channels.find('name', args.join(' '));
+        if (!channel) return message.reply('**لا يوجد روم بهاذا الاسم -_-**').catch(console.error);
+        channel.delete()
+    }
+});
 
  client.on('message', message => {
 var prefix = "$";
