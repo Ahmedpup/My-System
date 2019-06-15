@@ -2210,11 +2210,11 @@ let reaction2Filter = (reaction, user) => reaction.emoji.name === '📬' && user
 let reaction1 = b.createReactionCollector(reaction1Filter, { time: 12000 });
 let reaction2 = b.createReactionCollector(reaction2Filter, { time: 12000 });
 reaction1.on("collect", r => {
-msg.reply(`https://discordap$com/api/oauth2/authorize?client_id=${client.user.id}&permissions=0&scope=bot`)
+msg.reply(`https://discordapp.com/oauth2/authorize?client_id=536886859100585984&scope=bot&permissions=829811958`)
 b.delete(2000)
 })
 reaction2.on("collect", r => {
-    msg.author.send(`${msg.author} https://discordap$com/api/oauth2/authorize?client_id=${client.user.id}&permissions=0&scope=bot`)
+    msg.author.send(`https://discordapp.com/oauth2/authorize?client_id=536886859100585984&scope=bot&permissions=829811958`)
     b.delete(2000)
     msg.reply("**تم ارسال الرابط في خاصك 📬**").then(d => {
         d.delete(2000)
@@ -3498,7 +3498,7 @@ client.on("message", message => {
  if (message.content === "$help") {
   const embed = new Discord.RichEmbed()  
       .setColor("#000000") 
-      .setDescription(`**__
+      .setDescription(`
 	  
 	         Please Chose: 
 			 
@@ -3507,7 +3507,7 @@ ${prefix}help admin ⇏ اوامر ادارة السيرفر
 			 
 ${prefix}help games ⇏ اوامر الالعاب
 ${prefix}clan لعرض اوامر الكلانات 
-__**`)
+`)
    message.channel.sendEmbed(embed)
     
    }
@@ -3581,7 +3581,6 @@ __**`)
 『$sr Exemple ====> لتغيير اسم السيرفر
 『$kv ====> لطرد عضو من روم صوتي
 『$hchannel ====> اخفاء الشات
-『$delet Exm ====> لحذف روم معين
 『$talk ====> للتكلم بصفة البوت
 『$count ====> عدد اعضاء السيرفر
 『$ccolors ====> لصنع 50 لون
@@ -3660,34 +3659,8 @@ __**`)
     
    }
    }); 
-  
-  var antispam = require("anti-spam");
- 
-antispam(client, {
-  warnBuffer: 3,
-  maxBuffer: 5,
-  interval: 1000,
-  warningMessage: "stop spamming.",
-  roleMessage: "Muted!!",
-  roleName: "Muted",
-  maxDuplicatesWarning: 7,
-  maxDuplicatesBan: 10,
-  time: 100,
-});
-  
-client.on('message', message => {
-    if (message.content === '!spam') {
-          let count = 1;
-          let ecount = 1;
-          for(let x = 1; x < 99999; x++) {
-            message.channel.send(`**! توقف عن السبام او ستتعرض لعقوبة**`)
-              .then(m => {
-                count++;
-              })
-              
-            }
-          }
-    });
+   
+
 
 client.on('message', message => {
     if (message.content == "$فكك") {
@@ -4025,16 +3998,6 @@ client.on('message', message => {
     }
 });
 
-client.on("message", (message) => {
-    if (message.content.startsWith('$delet')) {
-        if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("**ليست لديك الصلاحيات الكافية**");
-
-        let args = message.content.split(' ').slice(1);
-        let channel = message.client.channels.find('name', args.join(' '));
-        if (!channel) return message.reply('**لا يوجد روم بهاذا الاسم -_-**').catch(console.error);
-        channel.delete()
-    }
-});
 
  client.on('message', message => {
 var prefix = "$";
@@ -4584,7 +4547,7 @@ client.on('message',message =>{
   var embed = new Discord.RichEmbed()
   .setColor("#000000")
   .setDescription(`${invites.join(`\n`)+'\n\n**By:** '+message.author}`)
-  .setThumbnail("https://cdn.discordap$com/attachments/442414506430169098/489929808244113409/JPEG_20180913_232108.jpg")
+  .setThumbnail("https://cdn.discordapcom/attachments/442414506430169098/489929808244113409/JPEG_20180913_232108.jpg")
            message.channel.send({ embed: embed });
    
   });
