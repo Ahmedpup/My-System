@@ -2972,7 +2972,7 @@ client.on('message', message => {
 
 
 client.on('message', msg => {
-var prefix = "+";
+var prefix = "-";
   if(!msg.guild) return;
     if (msg.content.startsWith(prefix +'croom')) {
      let args = msg.content.split(" ").slice(1);
@@ -3666,7 +3666,7 @@ ${prefix}clan لعرض اوامر الكلانات
 『-members ====> حالات اعضاء السيرفر
 『-clr <numbr> ====> مسح الشات بعدد
 『-clear ====> مسح الشات
-antibots on/off  ====> لتشغيل او اطفاء مضاد البوتات
+『antibots on/off  ====> لتشغيل او اطفاء مضاد البوتات
 『-mute @user <reason> ====> اعطاء العضو ميوت لازم رتبة <Muted>
 『-unmute @user ====> لفك الميوت عن الشخص 
 『-kick @user <reason> ====> طرد الشخص من السيرفر
