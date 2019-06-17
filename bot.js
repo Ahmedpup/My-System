@@ -3512,7 +3512,6 @@ if (message.content.startsWith(prefix + 'help')) {
   ✴-minv ====> لمعرفة عدد دعواتك
  ✴-colors ====> لعرض قائمة الالوان
   ✴-color ====> لوضع لون لك
- ✴-translate ====> لترجمة كلمة
   ✴-emojilist ====> لرؤية قائمة اموجيات السيرفر
  ✴-date ====> يعرضلك تاريخ اليوم
   ✴-email ====> يعطيك ايميل و باس عشوائي
@@ -3596,7 +3595,6 @@ if (message.content.startsWith(prefix + 'help')) {
   💠-لو خيروك
  💠-ضرب
   💠-فواكه
- 💠-عملة
   💠-كت
   💠-sara7a ====> لعبة صراحة
  💠-roll ====> قرعة
@@ -4058,63 +4056,10 @@ console.error(err);
 
 
 
-     var coinflip =["https://cdn.discordapp.com/attachments/437099530861936641/437721406046732289/Screenshot_15.png", "http://codeup.tk/s/do.php?img=28"]
-     client.on('message', message => {
-         var args = message.content.split(" ").slice(1);         
-     if(message.content.startsWith(prefix + 'عملة')) {
-          var embed = new Discord.RichEmbed()
- .setImage(coinflip[Math.floor(Math.random() * coinflip.length)])
- message.channel.sendEmbed(embed);
-     }
- });
+
 
  
 
-const translate = require('google-translate-api');
-const Langs = ['afrikaans', 'albanian', 'amharic', 'arabic', 'armenian', 'azerbaijani', 'bangla', 'basque', 'belarusian', 'bengali', 'bosnian', 'bulgarian', 'burmese', 'catalan', 'cebuano', 'chichewa', 'chinese simplified', 'chinese traditional', 'corsican', 'croatian', 'czech', 'danish', 'dutch', 'english', 'esperanto', 'estonian', 'filipino', 'finnish', 'french', 'frisian', 'galician', 'georgian', 'german', 'greek', 'gujarati', 'haitian creole', 'hausa', 'hawaiian', 'hebrew', 'hindi', 'hmong', 'hungarian', 'icelandic', 'igbo', 'indonesian', 'irish', 'italian', 'japanese', 'javanese', 'kannada', 'kazakh', 'khmer', 'korean', 'kurdish (kurmanji)', 'kyrgyz', 'lao', 'latin', 'latvian', 'lithuanian', 'luxembourgish', 'macedonian', 'malagasy', 'malay', 'malayalam', 'maltese', 'maori', 'marathi', 'mongolian', 'myanmar (burmese)', 'nepali', 'norwegian', 'nyanja', 'pashto', 'persian', 'polish', 'portugese', 'punjabi', 'romanian', 'russian', 'samoan', 'scottish gaelic', 'serbian', 'sesotho', 'shona', 'sindhi', 'sinhala', 'slovak', 'slovenian', 'somali', 'spanish', 'sundanese', 'swahili', 'swedish', 'tajik', 'tamil', 'telugu', 'thai', 'turkish', 'ukrainian', 'urdu', 'uzbek', 'vietnamese', 'welsh', 'xhosa', 'yiddish', 'yoruba', 'zulu'];
-
-client.on('message', message => {
-if (message.content.startsWith(prefix + 'translate')) {
-    let args = message.content.split(" ").slice(1);
-    if (!args[0]) {
-    
-        const embed = new Discord.RichEmbed()
-            .setColor("FFFFFF")
-            .setDescription("**ترجمة الكتابة.**\استعمل: `+translate <الكمة لتبي> <االغة>`");
-
-        return message.channel.send(embed);
-
-    } else {
-
-        if (args.length === undefined) {
-
-            return message.channel.send("**ترجمة الكتابة.**\استعمل: `+translate <الكمة لتبي> <االغة>`");
-
-        } else {
-
-            let transArg = args[0].toLowerCase();
-
-            args = args.join(' ').slice(1)
-            let translation;
-
-            if (!Langs.includes(transArg)) return message.channel.send(`**Language not found.**`);
-            args = args.slice(transArg.length);
-
-            translate(args, {
-                to: transArg
-            }).then(res => {
-
-                const embed = new Discord.RichEmbed()
-                    .setAuthor("Translator", client.user.displayAvatarURL)
-                    .addField(`Input`, `\`\`\`${args}\`\`\``)
-                    .setColor("#42f4c8")
-                    .addField(`Output`, `\`\`\`${res.text}\`\`\``);
-                return message.channel.send(embed);
-            });
-        }
-    }
-}
-});
 
 client.on('message', message => {
 if(message.content.startsWith("-فواكه")) {
@@ -4199,7 +4144,7 @@ var aoasm =[
     {q:"ما عاصمة **كندا  **",a:"اوتاوا"},
     {q:"ما عاصمة **البرازيل  **",a:"برازيليا"},
    ];
-    if(message.content == prefix+"عواصم"){
+if(message.content.startsWith("-عواصم")) {
         if(UserBlocked.has(message.guild.id)) return message.channel.send("هناك جلسة .")
         UserBlocked.add(message.guild.id)
         var ask = aoasm[Math.floor(Math.random() * aoasm.length)];
