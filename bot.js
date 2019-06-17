@@ -3810,7 +3810,7 @@ __**`)
  
   client.on("message", message => {
 	var prefix = "-";
- if (message.content === "-help games") {
+ if (message.content === "-help protection") {
 	  message.channel.send('**تم ارسال الاوامر في الخاص** :mailbox_with_mail: ');
   const embed = new Discord.RichEmbed() 
       .setColor("#000000")
