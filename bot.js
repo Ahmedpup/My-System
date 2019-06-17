@@ -3658,7 +3658,6 @@ if (message.content.startsWith(prefix + 'help')) {
     })
     }
 });
-});
    
 let antibots = JSON.parse(fs.readFileSync('./antibots.json' , 'utf8'));
 client.on('message', message => {
