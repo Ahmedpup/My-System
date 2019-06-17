@@ -2867,7 +2867,7 @@ client.on('message', message => {
 
   let args = message.content.split(" ").slice(1);
 
-  if (command == "انقلع") {
+  if (command == "ban") {
                if(!message.channel.guild) return message.reply('** This command only for servers**');
          
   if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("**انت لا تملك الصلاحيات المطلوبه**");
@@ -3004,7 +3004,7 @@ message.channel.sendEmbed(cat);
 client.on('message' , message => {
     ;
     let user = message.mentions.users.first()|| client.users.get(message.content.split(' ')[1])
-    if(message.content.startsWith(prefix + 'ارجع')) {
+    if(message.content.startsWith(prefix + 'unban')) {
         if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send('❌|**\`ADMINISTRATOR\`لا توجد لديك رتبة`**');
         if(!user) return  message.channel.send(`Do this ${prefix} <@ID user> \n or \n ${prefix}unban ID user`);
         message.guild.unban(user);
@@ -3493,11 +3493,18 @@ client.on('message', message => {
         });
 
    
-   client.on('message', message => {
- var prefix = "-";
-if (message.content.startsWith(prefix + 'help')) {
-    let pages = [
-	`=-=-=-=-=-= 🌍 Public Commands - اوامر عامة 🌍 =-=-=-=-=-=
+
+
+client.on('message', message => {
+if (message.content.startsWith(prefix + 'help')) { 
+    let pages = [`
+***__وصف عن البوت__***
+**
+:gem:  البوت فيه كثير ميزات حلوة و جميلة
+ ا:rocket: البوت يعمل قرابة 24 ساعة
+                 Enjoy :D
+**
+	=-=-=-=-=-= 🌍 Public Commands - اوامر عامة 🌍 =-=-=-=-=-=
  ✴-ping ====> لمعرفة سرعة اتصال البوت
   ✴-link ====> يسويلك رابط لمدة يوم وعدد الاستخدامات 100
  ✴-tag ====> لعرض الكلام بشكل جميل و كبير
@@ -3565,13 +3572,13 @@ if (message.content.startsWith(prefix + 'help')) {
  ❖-role bots rolename ====> لأعطاء رتبة لجميع البوتات
   ❖-members ====> حالات اعضاء السيرفر
  ❖-clr <numbr> ====> مسح الشات بعدد
-❖مسح- ====> مسح الشات
+❖-clear ====> مسح الشات
  ❖antibots on/off  ====> لتشغيل او اطفاء مضاد البوتات
   ❖-mute @user <reason> ====> اعطاء العضو ميوت لازم رتبة <Muted>
  ❖-unmute @user ====> لفك الميوت عن الشخص 
   ❖-kick @user <reason> ====> طرد الشخص من السيرفر
- ❖-انقلع @user <reason> ====> حضر الشخص من السيرفر
-  ❖-ارجع @user ====> لفك حضر الشخص من السيرفر
+ ❖-ban @user <reason> ====> حضر الشخص من السيرفر
+  ❖-unban @user ====> لفك حضر الشخص من السيرفر
  ❖-mchannel ====> تقفيل الشات
   ❖-unmchannel ====> فتح الشات
  ❖-croom ====> لصنع روم بنوعيه
@@ -3605,41 +3612,30 @@ if (message.content.startsWith(prefix + 'help')) {
   💠-kill ====> لعبة قتل
  💠-quas ====> اسئلة عامة
   💠-لعبة مريم ====> مريم
-    ===========================================================
-      اضغط على الرياكشن لرؤية مقدمة عن البوت ▶`,
-	`=-=-=-=-=-= **__مقدمة__** =-=-=-=-=-=
- السلام عليكم 
- طبعا البوت دا فيه الكثير من الخصائص الجميلة
- التي ستساعدك في تحسين سيرفرك او كلانك
- يتمتع بخاصية الحماية من التهكير
- وكذالك عديد الاوامر النادرة و الطريفة
- اتمنا ان تستمتعو
- اذا واجهتم اي مشتكلة من اي نوع استعملو الامر 
- -contact
- Enjoy :D
- `]
-		let page = 1;
-
+   
+`]
+    let page = 1;
+ 
     let embed = new Discord.RichEmbed()
     .setColor('RANDOM')
     .setFooter(`Page ${page} of ${pages.length}`)
     .setDescription(pages[page-1])
-
-    message.channel.sendEmbed(embed).then(msg => {
-
+ 
+    message.author.sendEmbed(embed).then(msg => {
+ 
         msg.react('◀').then( r => {
             msg.react('▶')
-
-
+ 
+ 
         const backwardsFilter = (reaction, user) => reaction.emoji.name === '◀' && user.id === message.author.id;
         const forwardsFilter = (reaction, user) => reaction.emoji.name === '▶' && user.id === message.author.id;
-
-
-        const backwards = msg.createReactionCollector(backwardsFilter, { time: 20000});
-        const forwards = msg.createReactionCollector(forwardsFilter, { time: 20000});
-
-
-
+ 
+ 
+        const backwards = msg.createReactionCollector(backwardsFilter, { time: 2000000});
+        const forwards = msg.createReactionCollector(forwardsFilter, { time: 2000000});
+ 
+ 
+ 
         backwards.on('collect', r => {
             if (page === 1) return;
             page--;
@@ -3649,7 +3645,8 @@ if (message.content.startsWith(prefix + 'help')) {
         })
         forwards.on('collect', r => {
             if (page === pages.length) return;
-            page++;
+     
+      page++;
             embed.setDescription(pages[page-1]);
             embed.setFooter(`Page ${page} of ${pages.length}`);
             msg.edit(embed)
