@@ -1143,31 +1143,31 @@ client.on("message", message => {
  
  
         if (!message.member.hasPermission('MANAGE_GUILD')) return;
-        if (message.content.startsWith(prefix + "-limitbans")) {
+        if (message.content.startsWith(prefix + "limitbans")) {
             if (!num) return message.channel.send("**⇏ | أرسل رقم ! **");
             if (isNaN(num)) return message.channel.send("**⇏ | أرقام فقط ! **");
             config[message.guild.id].banLimit = num;
             message.channel.send(`**⇏ | تم التغيير اِلي : ${config[message.guild.id].banLimit} **`)
         }
-        if (message.content.startsWith(prefix + "-limitkicks")) {
+        if (message.content.startsWith(prefix + "limitkicks")) {
             if (!num) return message.channel.send("**⇏ | أرسل رقم ! **");
             if (isNaN(num)) return message.channel.send("**⇏ | أرقام فقط ! **");
             config[message.guild.id].kickLimits = num;
             message.channel.send(`**⇏ | تم التغيير اِلي : ${config[message.guild.id].kickLimits}**`)
         }
-        if (message.content.startsWith(prefix + "-limitroleDelete")) {
+        if (message.content.startsWith(prefix + "limitroleDelete")) {
             if (!num) return message.channel.send("**⇏ | أرسل رقم ! **");
             if (isNaN(num)) return message.channel.send("**⇏ | أرقام فقط ! **");
             config[message.guild.id].roleDelLimit = num;
             message.channel.send(`**⇏ | تم التغيير اِلي : ${config[message.guild.id].roleDelLimit}**`)
         }
-        if (message.content.startsWith(prefix + "-limitroleCreate")) {
+        if (message.content.startsWith(prefix + "limitroleCreate")) {
             if (!num) return message.channel.send("**⇏ | أرسل رقم ! **");
             if (isNaN(num)) return message.channel.send("**⇏ | أرقام فقط ! **");
             config[message.guild.id].roleCrLimits = num;
             message.channel.send(`**⇏ | تم التغيير اِلي : ${config[message.guild.id].roleCrLimits}**`)
         }
-        if (message.content.startsWith(prefix + "-limitchannelDelete")) {
+        if (message.content.startsWith(prefix + "limitchannelDelete")) {
             if (!num) return message.channel.send("**⇏ | أرسل رقم ! **");
             if (isNaN(num)) return message.channel.send("**⇏ | أرقام فقط ! **");
             config[message.guild.id].chaDelLimit = num;
