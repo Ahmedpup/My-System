@@ -3817,12 +3817,12 @@ __**`)
       .setDescription(`
        :closed_lock_with_key: ***__اوامر الحماية__***:key:
  **       
--antibots on/off  ====> لتشغيل او اطفاء مانع ادخال البوتات
--limitbans ====> لتحديد الحد الاقصى لتبنيد الاعضاء
--limitkicks ====> لتحديد الحد الاقصى لطرد الاعضاء 
--limitroleDelete ====> لتحديد الحد الاقصى لحذف الرتب
--limitroleCreate ====> لتحديد الحد الاقصى لعمل الرتب 
--limitchannelDelete ====> لتحديد الحد الاقصى لحذف الرومات 
+۞-antibots on/off  ====> لتشغيل او اطفاء مانع ادخال البوتات
+۞-limitbans ====> لتحديد الحد الاقصى لتبنيد الاعضاء
+۞-limitkicks ====> لتحديد الحد الاقصى لطرد الاعضاء 
+۞-limitroleDelete ====> لتحديد الحد الاقصى لحذف الرتب
+۞-limitroleCreate ====> لتحديد الحد الاقصى لعمل الرتب 
+۞-limitchannelDelete ====> لتحديد الحد الاقصى لحذف الرومات 
 **
 `)
    message.author.sendEmbed(embed)
