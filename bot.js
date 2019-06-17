@@ -1139,41 +1139,40 @@ client.on("message", message => {
         roleCrLimits: 3,
         time: 30
     }
-    if (message.content.startsWith(prefix + "settingslimits")) {
- 
- 
+    if (message.content.startsWith("-settingslimits")) {
+
         if (!message.member.hasPermission('MANAGE_GUILD')) return;
-        if (message.content.startsWith(prefix + "limitbans")) {
+        if (message.content.startsWith("-limitbans")) {
             if (!num) return message.channel.send("**⇏ | أرسل رقم ! **");
             if (isNaN(num)) return message.channel.send("**⇏ | أرقام فقط ! **");
             config[message.guild.id].banLimit = num;
             message.channel.send(`**⇏ | تم التغيير اِلي : ${config[message.guild.id].banLimit} **`)
         }
-        if (message.content.startsWith(prefix + "limitkicks")) {
+        if (message.content.startsWith("-limitkicks")) {
             if (!num) return message.channel.send("**⇏ | أرسل رقم ! **");
             if (isNaN(num)) return message.channel.send("**⇏ | أرقام فقط ! **");
             config[message.guild.id].kickLimits = num;
             message.channel.send(`**⇏ | تم التغيير اِلي : ${config[message.guild.id].kickLimits}**`)
         }
-        if (message.content.startsWith(prefix + "limitroleDelete")) {
+        if (message.content.startsWith("-limitroleDelete")) {
             if (!num) return message.channel.send("**⇏ | أرسل رقم ! **");
             if (isNaN(num)) return message.channel.send("**⇏ | أرقام فقط ! **");
             config[message.guild.id].roleDelLimit = num;
             message.channel.send(`**⇏ | تم التغيير اِلي : ${config[message.guild.id].roleDelLimit}**`)
         }
-        if (message.content.startsWith(prefix + "limitroleCreate")) {
+        if (message.content.startsWith("-limitroleCreate")) {
             if (!num) return message.channel.send("**⇏ | أرسل رقم ! **");
             if (isNaN(num)) return message.channel.send("**⇏ | أرقام فقط ! **");
             config[message.guild.id].roleCrLimits = num;
             message.channel.send(`**⇏ | تم التغيير اِلي : ${config[message.guild.id].roleCrLimits}**`)
         }
-        if (message.content.startsWith(prefix + "limitchannelDelete")) {
+        if (message.content.startsWith("-limitchannelDelete")) {
             if (!num) return message.channel.send("**⇏ | أرسل رقم ! **");
             if (isNaN(num)) return message.channel.send("**⇏ | أرقام فقط ! **");
             config[message.guild.id].chaDelLimit = num;
             message.channel.send(`**⇏ | تم التغيير اِلي : ${config[message.guild.id].chaDelLimit}**`)
         }
-        if (message.content.startsWith(prefix + "limitstime")) {
+        if (message.content.startsWith("-limitstime")) {
             if (!num) return message.channel.send("**⇏ | أرسل رقم ! **");
             if (isNaN(num)) return message.channel.send("**⇏ | أرقام فقط ! **");
             config[message.guild.id].time = num;
@@ -3648,7 +3647,6 @@ client.on("message", message => {
       .setColor("#000000") 
       .setDescription(`**__
 	         قم بالاختيار: 
-			 
 ${prefix}help public ⇏ اوامر عامة
 ${prefix}help admin ⇏ اوامر ادارة السيرفر
 ${prefix}help games ⇏ اوامر الالعاب
