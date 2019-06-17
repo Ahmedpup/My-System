@@ -3584,14 +3584,13 @@ if (message.content.startsWith(prefix + 'help')) {
      ===========================================================
       اضغط على الرياكشن لرؤية اوامر الالعاب ▶`,
 	`=-=-=-=-=-= 🎯  Games Commands - اوامر الالعاب 🎯 =-=-=-=-=-=
-  💠-8ball ====> لعبه تسال البوت اسال  وهو يجاوب عنها
- 💠-هل تعلم
-  💠-cal ====> ألة حاسبة
- 💠-za5 ====> لزخرفة ما تقول
-  💠-cats ====> قطط كيوت
- 💠-love ====> يعطيك اقوال عن الحب 
-  💠-جمع
- 💠-speed ====> لعبة اسرع كتابة
+ 💠-8ball ====> لعبه تسال البوت اسال  وهو يجاوب عنها
+  💠-هل تعلم
+ 💠-cal ====> ألة حاسبة
+  💠-za5 ====> لزخرفة ما تقول
+ 💠-cats ====> قطط كيوت
+  💠-love ====> يعطيك اقوال عن الحب 
+ 💠-جمع
   💠-اذكار
  💠-طرح
   💠-لو خيروك
@@ -3978,61 +3977,7 @@ const type = [
     }
 ];
  
-client.on('message', message => {
-if (!points[message.author.id]) points[message.author.id] = {
-    points: 0,
-  };
-  if(!message.guild) return;
-    let id = message.author.id,prefix="-";
-    if (spee[id] && (new Date).getTime() - spee[id] < 15*1000) {
-        let r = (new Date).getTime() - spee[id];
-        r = 15*1000 - r;
-    message.channel.send(`**Sorry, Please Wait ${pretty(r, {verbose:true})}...**`).then(m => m.delete(5000));
-    return;
-    }
-    if ( message.content == prefix+'speed'){
-       
-        try{
-}catch(e){
- 
-}
- 
-    if(!message.channel.guild) return message.reply('**هذا الأمر للسيرفرات فقط**').then(m => m.delete(3000));
- 
- 
-const item = type[Math.floor(Math.random() * type.length)];
-const filter = response => {  
-    return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
-};
-message.channel.send('**Game is Start now...!**').then(msg => {
- 
- const embed = new Discord.RichEmbed()
- .setColor("0054dd")
-     .setAuthor(`⏳ |You have »15« seconds to type the word`)
-          .setImage(`${item.type}`)
- .setFooter(`${message.author.tag}`, message.author.avatarURL)
- 
- 
-         
-msg.channel.send(embed).then(() => {
-        message.channel.awaitMessages(filter, { maxMatches: 1, time: 15000, errors: ['time'] })
-        .then((collected) => {
-                  const sh = new Discord.RichEmbed()
-  .setColor("04791c")
-  .setDescription('**✅ |Good Job +1P**')
-   .setFooter(`${collected.first().author}`)
-  message.channel.sendEmbed(sh);
-            let won = collected.first().author; 
-            points[won.id].points++;
-          })
-          .catch(collected => { 
-            message.channel.send(`🔚 |**انتها الوقت**`);
-          })
-        })
-    })
-    spee[id] = (new Date).getTime()
-}
-});
+
  
  const cuttweet = [
      'كت تويت ‏| تخيّل لو أنك سترسم شيء وحيد فيصبح حقيقة، ماذا سترسم؟',
