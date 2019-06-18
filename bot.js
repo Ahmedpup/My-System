@@ -3505,7 +3505,7 @@ client.on("message", message => {
 ✴${prefix}help public ⇏ اوامر عامة
 ✴${prefix}help admin ⇏ اوامر ادارة السيرفر
 ✴${prefix}help games ⇏ اوامر الالعاب
-$✴{prefix}help other ⇏ اوامر اخرى
+✴${prefix}help other ⇏ اوامر اخرى
 **`)
    message.channel.sendEmbed(embed)
     
@@ -3577,16 +3577,16 @@ $✴{prefix}help other ⇏ اوامر اخرى
  ❖-leave ====> لطرد البوت من سيرفرك:door: 
  ❖-vonline ====> لعمل روم صوتي اونلاين:calling: 
   ❖-schannel ====> اضهار الشات المخفية:eye_in_speech_bubble: 
- ❖-setName Exemple ====> لتغيير اسم السيرفر:name_badge: 
+ ❖-setName Exemple ====> لتغيير اسم السيرفر 
   ❖-setIcon ====> لتغيير صورة السيرفر:movie_camera: 
  ❖-kv ====> لطرد عضو من روم صوتي:outbox_tray: 
   ❖-hchannel ====> اخفاء الشات:no_entry: 
- ❖-count ====> عدد اعضاء السيرفر:zero: 
+ ❖-count ====> عدد اعضاء السيرفر
   ❖-ccolors ====> لصنع 50 لون:rainbow: 
- ❖-setlog ====> لصنع روم اللوج:tools: 
+ ❖-setlog ====> لصنع روم اللوج
   ❖-server ====> يعرض لك معلومات عن السيرفر:gear: 
- ❖-movall ====> لسحب الجميع الى رومك:runner::skin-tone-1: 
-  ❖-sug ====> لصنع اقتراح او توصويت يجب توفر روم الاقتراحات:question: 
+ ❖-movall ====> لسحب الجميع الى رومك:
+  ❖-sug ====> لصنع اقتراح او توصويت يجب توفر روم الاقتراحات
  ❖-bs ====> لمعرفة سيرفرات البوت:smile: 
   ❖-rooms ====> لرؤية رومات السيرفر:homes: 
  ❖-dc ====> مسح كل الرومات:wastebasket: 
@@ -3596,10 +3596,10 @@ $✴{prefix}help other ⇏ اوامر اخرى
  ❖-allbots ====> يوريك كل البوتات في سيرفرك
   ❖-move ====> لسحب عضو الى روم صوتية:robot: 
  ❖-giveaway ====> لصنع جيفواي:tada: 
-  ❖-role @mention rolename ====> لأعطاء رتبة لعضو معين:bust_in_silhouette: 
+  ❖-role @mention rolename ====> لأعطاء رتبة لعضو معين
  ❖-role all rolename ====> لأعطاء رتبة للجميع:busts_in_silhouette: 
   ❖-role humans rolename ====> لأعطاء رتبة للاشخاص فقط:man::skin-tone-1: 
- ❖-role bots rolename ====> لأعطاء رتبة لجميع البوتات:robot: 
+ ❖-role bots rolename ====> لأعطاء رتبة لجميع البوتات
   ❖-members ====> حالات اعضاء السيرفر:large_blue_circle: 
  ❖-clr <numbr> ====> مسح الشات بعدد:shower: 
 ❖-clear ====> مسح الشات:wastebasket: 
