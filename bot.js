@@ -1122,348 +1122,147 @@ client.on("message", (message) => {
         }
     }});
 
-let anti = JSON.parse(fs.readFileSync("./antigreff.json", "UTF8"));
-let config = JSON.parse(fs.readFileSync("./config.json", "UTF8"));
-client.on("message", message => {
-    if (!message.channel.guild) return;
-    let user = anti[message.guild.id + message.author.id]
-    let num = message.content.split(" ").slice(2).join(" ");
-    if (!anti[message.guild.id + message.author.id]) anti[message.guild.id + message.author.id] = {
-        actions: 0
-    }
-    if (!config[message.guild.id]) config[message.guild.id] = {
-        banLimit: 3,
-        chaDelLimit: 3,
-        roleDelLimit: 3,
-        kickLimits: 3,
-        roleCrLimits: 3,
-        time: 30
-    }
-    if (message.content.startsWith("-settingslimits")) {
-
-        if (!message.member.hasPermission('MANAGE_GUILD')) return;
-        if (message.content.startsWith("-limitbans")) {
-            if (!num) return message.channel.send("**⇏ | أرسل رقم ! **");
-            if (isNaN(num)) return message.channel.send("**⇏ | أرقام فقط ! **");
-            config[message.guild.id].banLimit = num;
-            message.channel.send(`**⇏ | تم التغيير اِلي : ${config[message.guild.id].banLimit} **`)
-        }
-        if (message.content.startsWith("-limitkicks")) {
-            if (!num) return message.channel.send("**⇏ | أرسل رقم ! **");
-            if (isNaN(num)) return message.channel.send("**⇏ | أرقام فقط ! **");
-            config[message.guild.id].kickLimits = num;
-            message.channel.send(`**⇏ | تم التغيير اِلي : ${config[message.guild.id].kickLimits}**`)
-        }
-        if (message.content.startsWith("-limitroleDelete")) {
-            if (!num) return message.channel.send("**⇏ | أرسل رقم ! **");
-            if (isNaN(num)) return message.channel.send("**⇏ | أرقام فقط ! **");
-            config[message.guild.id].roleDelLimit = num;
-            message.channel.send(`**⇏ | تم التغيير اِلي : ${config[message.guild.id].roleDelLimit}**`)
-        }
-        if (message.content.startsWith("-limitroleCreate")) {
-            if (!num) return message.channel.send("**⇏ | أرسل رقم ! **");
-            if (isNaN(num)) return message.channel.send("**⇏ | أرقام فقط ! **");
-            config[message.guild.id].roleCrLimits = num;
-            message.channel.send(`**⇏ | تم التغيير اِلي : ${config[message.guild.id].roleCrLimits}**`)
-        }
-        if (message.content.startsWith("-limitchannelDelete")) {
-            if (!num) return message.channel.send("**⇏ | أرسل رقم ! **");
-            if (isNaN(num)) return message.channel.send("**⇏ | أرقام فقط ! **");
-            config[message.guild.id].chaDelLimit = num;
-            message.channel.send(`**⇏ | تم التغيير اِلي : ${config[message.guild.id].chaDelLimit}**`)
-        }
-        if (message.content.startsWith("-limitstime")) {
-            if (!num) return message.channel.send("**⇏ | أرسل رقم ! **");
-            if (isNaN(num)) return message.channel.send("**⇏ | أرقام فقط ! **");
-            config[message.guild.id].time = num;
-            message.channel.send(`**⇏ | تم التغيير اِلي : ${config[message.guild.id].time}**`)
-        }
-        fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
-            if (e) throw e;
-        });
-        fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
-            if (e) throw e;
-        });
-    }
-});
-client.on("channelDelete", async channel => {
-    const entry1 = await channel.guild.fetchAuditLogs({
-        type: 'CHANNEL_DELETE'
-    }).then(audit => audit.entries.first())
-    console.log(entry1.executor.username)
-    const entry = entry1.executor
-    if (!config[channel.guild.id]) config[channel.guild.id] = {
-        banLimit: 3,
-        chaDelLimit: 3,
-        roleDelLimit: 3,
-        kickLimits: 3,
-        roleCrLimits: 3
-    }
-    if (!anti[channel.guild.id + entry.id]) {
-        anti[channel.guild.id + entry.id] = {
-            actions: 1
-        }
-        setTimeout(() => {
-            anti[channel.guild.id + entry.id].actions = "0"
-        }, config[channel.guild.id].time * 1000)
-    } else {
-        anti[channel.guild.id + entry.id].actions = Math.floor(anti[channel.guild.id + entry.id].actions + 1)
-        console.log("TETS");
-        setTimeout(() => {
-            anti[channel.guild.id + entry.id].actions = "0"
-        }, config[channel.guild.id].time * 1000)
-        if (anti[channel.guild.id + entry.id].actions >= config[channel.guild.id].chaDelLimit) {
-            channel.guild.members.get(entry.id).ban().catch(e => channel.guild.owner.send(`**⇏ | ${entry.username} قام بمسح الكثير من الرومات **`))
-            anti[channel.guild.id + entry.id].actions = "0"
-            fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
-                if (e) throw e;
+let antihack = JSON.parse(fs.readFileSync('./antihack.json' , 'utf8'));
+client.on('message', message => { 
+    if(message.content.startsWith(prefix + "tAntihack")) { 
+        if(!message.channel.guild) return message.reply('**This Command Only For Servers**'); 
+        if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('**Sorry But You Dont Have Permission** `MANAGE_GUILD`' ); 
+        if(!antihack[message.guild.id]) antihack[message.guild.id] = { 
+          onoff: 'Off'
+        } 
+          if(antihack[message.guild.id].onoff === 'Off') return [message.channel.send(`**✅ The AntiHack Is __𝐎𝐍__ !**`), antihack[message.guild.id].onoff = 'On']
+          if(antihack[message.guild.id].onoff === 'On') return [message.channel.send(`**⛔ The AntiHack Is __𝐎𝐅𝐅__ !**`), antihack[message.guild.id].onoff = 'Off']
+          fs.writeFile("./antihack.json", JSON.stringify(antihack), (err) => {
+            if (err) console.error(err)
+            .catch(err => {
+              console.error(err);
+          });
             });
-            fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
-                if (e) throw e;
-            });
-        }
-    }
+          }
  
-    fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
-        if (e) throw e;
-    });
-    fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
-        if (e) throw e;
-    });
-});
+        })
+        
  
-client.on("roleDelete", async channel => {
-    const entry1 = await channel.guild.fetchAuditLogs({
-        type: 'ROLE_DELETE'
-    }).then(audit => audit.entries.first())
-    console.log(entry1.executor.username)
-    const entry = entry1.executor
-    if (!config[channel.guild.id]) config[channel.guild.id] = {
-        banLimit: 3,
-        chaDelLimit: 3,
-        roleDelLimit: 3,
-        kickLimits: 3,
-        roleCrLimits: 3
-    }
-    if (!anti[channel.guild.id + entry.id]) {
-        anti[channel.guild.id + entry.id] = {
-            actions: 1
-        }
-        setTimeout(() => {
-            anti[channel.guild.id + entry.id].actions = "0"
-        }, config[channel.guild.id].time * 1000)
-    } else {
-        anti[channel.guild.id + entry.id].actions = Math.floor(anti[channel.guild.id + entry.id].actions + 1)
-        console.log("TETS");
-        setTimeout(() => {
-            anti[channel.guild.id + entry.id].actions = "0"
-        }, config[channel.guild.id].time * 1000)
-        if (anti[channel.guild.id + entry.id].actions >= config[channel.guild.id].roleDelLimit) {
-            channel.guild.members.get(entry.id).ban().catch(e => channel.guild.owner.send(`**⇏ | ${entry.username} قام بمسح الكثير من الرتب **`))
-            anti[channel.guild.id + entry.id].actions = "0"
-            fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
-                if (e) throw e;
-            });
-            fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
-                if (e) throw e;
-            });
-        }
-    }
+  let banse = new Set();
+  let bane = JSON.parse(fs.readFileSync('./data1.json' , 'utf8'));
+  client.on('guildBanAdd', function(guild) {
+    guild.fetchAuditLogs().then(logs => {
+      const ser = logs.entries.first().executor;
+      if(!bane[ser.id+guild.id]) bane[ser.id+guild.id] = {
+        bans: 2
+      }
+      if(antihack[guild.guild.id].onoff === 'Off') return;
+      let boner = bane[ser.id+guild.id]
+  banse.add(ser.id)
+  boner.bans = Math.floor(boner.bans+1)
  
-    fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
-        if (e) throw e;
-    });
-    fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
-        if (e) throw e;
-    });
-});
  
-client.on("roleCreate", async channel => {
-    const entry1 = await channel.guild.fetchAuditLogs({
-        type: 'ROLE_CREATE'
-    }).then(audit => audit.entries.first())
-    console.log(entry1.executor.username)
-    const entry = entry1.executor
-    if (!config[channel.guild.id]) config[channel.guild.id] = {
-        banLimit: 3,
-        chaDelLimit: 3,
-        roleDelLimit: 3,
-        kickLimits: 3,
-        roleCrLimits: 3
-    }
-    if (!anti[channel.guild.id + entry.id]) {
-        anti[channel.guild.id + entry.id] = {
-            actions: 1
-        }
-        setTimeout(() => {
-            anti[channel.guild.id + entry.id].actions = "0"
-        }, config[channel.guild.id].time * 1000)
-    } else {
-        anti[channel.guild.id + entry.id].actions = Math.floor(anti[channel.guild.id + entry.id].actions + 1)
-        console.log("TETS");
-        setTimeout(() => {
-            anti[channel.guild.id + entry.id].actions = "0"
-        }, config[channel.guild.id].time * 1000)
-        if (anti[channel.guild.id + entry.id].actions >= config[channel.guild.id].roleCrLimits) {
-            channel.guild.members.get(entry.id).ban().catch(e => channel.guild.owner.send(`**⇏ | ${entry.username} قام بأنشاء الكثير من الرتب **`))
-            anti[channel.guild.id + entry.id].actions = "0"
-            fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
-                if (e) throw e;
-            });
-            fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
-                if (e) throw e;
-            });
-        }
-    }
+  setTimeout(() => {
+    boner.bans = 2
+    banse.delete(ser.id)
+  },8000)
  
-    fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
-        if (e) throw e;
-    });
-    fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
-        if (e) throw e;
-    });
-});
+  if(boner.bans > 2) {
+    let roles = guild.members.get(ser.id).roles.array()
+  guild.members.get(ser.id).removeRoles(roles)
+  }
  
-client.on("guildBanAdd", async (guild, user) => {
-    const entry1 = await channel.guild.fetchAuditLogs({
-        type: 'MEMBER_BAN_ADD'
-    }).then(audit => audit.entries.first())
-    console.log(entry1.executor.username)
-    const entry = entry1.executor
-    if (!config[guild.id]) config[guild.id] = {
-        banLimit: 3,
-        chaDelLimit: 3,
-        roleDelLimit: 3,
-        kickLimits: 3,
-        roleCrLimits: 3
-    }
-    if (!anti[guild.id + entry.id]) {
-        anti[guild.id + entry.id] = {
-            actions: 1
-        }
-        setTimeout(() => {
-            anti[guild.id + entry.id].actions = "0"
-        }, config[guild.id].time * 1000)
-    } else {
-        anti[guild.id + entry.id].actions = Math.floor(anti[guild.id + entry.id].actions + 1)
-        console.log("TETS");
-        setTimeout(() => {
-            anti[guild.id + entry.id].actions = "0"
-        }, config[guild.id].time * 1000)
-        if (anti[guild.id + entry.id].actions >= config[guild.id].banLimit) {
-            channel.members.get(entry.id).ban().catch(e => channel.owner.send(`**⇏ | ${entry.username} حاول حظر جميع الأعضاء **`))
-            anti[guild.id + entry.id].actions = "0"
-            fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
-                if (e) throw e;
-            });
-            fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
-                if (e) throw e;
-            });
-        }
-    }
+      })
+      fs.writeFile('./data1.json', JSON.stringify(bane), (err) => {
+  if (err) console.error(err);
+  })
  
-    fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
-        if (e) throw e;
-    });
-    fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
-        if (e) throw e;
-    });
-});
+  })
+  client.on('guildMemberRemove', (u) => {
+      u.guild.fetchAuditLogs().then( s => {
+          var ss = s.entries.first();
+          if (ss.action == `MEMBER_KICK`) {
+          if (!data[ss.executor.id]) {
+              data[ss.executor.id] = {
+              time : 1
+            };
+            if(antihack[u.guild.id].onoff === 'Off') return;
  
-client.on("guildKickAdd", async (guild, user) => {
-    const entry1 = await channel.fetchAuditLogs({
-        type: 'MEMBER_KICK'
-    }).then(audit => audit.entries.first())
-    console.log(entry1.executor.username)
-    const entry = entry1.executor
-    if (!config[guild.id]) config[guild.id] = {
-        banLimit: 3,
-        chaDelLimit: 3,
-        roleDelLimit: 3,
-        kickLimits: 3,
-        roleCrLimits: 3
-    }
-    if (!anti[guild.id + entry.id]) {
-        anti[guild.id + entry.id] = {
-            actions: 1
-        }
-        setTimeout(() => {
-            anti[guild.id + entry.id].actions = "0"
-        }, config[guild.id].time * 1000)
-    } else {
-        anti[guild.id + entry.id].actions = Math.floor(anti[guild.id + entry.id].actions + 1)
-        console.log("TETS");
-        setTimeout(() => {
-            anti[guild.id + entry.id].actions = "0"
-        }, config[guild.id].time * 1000)
-        if (anti[guild.id + entry.id].actions >= config[guild.id].banLimit) {
-            channel.members.get(entry.id).ban().catch(e => channel.owner.send(`**⇏ | ${entry.username} حاول حظر جميع الأعضاء **`))
-            anti[guild.id + entry.id].actions = "0"
-            fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
-                if (e) throw e;
-            });
-            fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
-                if (e) throw e;
-            });
-        }
-    }
+        } else {  
+            data[ss.executor.id].time+=1
+        };
+        if(antihack[u.guild.id].onoff === 'Off') return;
+  data[ss.executor.id].time = 0
+  u.guild.members.get(ss.executor.id).roles.forEach(r => {
+                  r.edit({
+                      permissions : []
+                  });
+                  data[ss.executor.id].time = 0
+              });
+          setTimeout(function(){
+              if (data[ss.executor.id].time <= 3) {
+                  data[ss.executor.id].time = 0
+              }
+          })
+      };
+      });
+    const data = require("./data.json");
+  });
+  client.on('roleDelete', (u) => {
+      u.guild.fetchAuditLogs().then( s => {
+          var ss = s.entries.first();
+          if (ss.action == `ROLE_DELETE`) {
+          if (!data[ss.executor.id]) {
+              data[ss.executor.id] = {
+              time : 1
+            };
+            if(antihack[u.guild.id].onoff === 'Off') return;
  
-    fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
-        if (e) throw e;
-    });
-    fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
-        if (e) throw e;
-    });
-});
- 
-client.on("guildMemberRemove", async member => {
-    const entry1 = await member.guild.fetchAuditLogs().then(audit => audit.entries.first())
-    if (entry1.action === "MEMBER_KICK") {
-        const entry2 = await member.guild.fetchAuditLogs({
-            type: "MEMBER_KICK"
-        }).then(audit => audit.entries.first())
-        const entry = entry2.executor;
-        if (!config[member.guild.id]) config[guild.id] = {
-            banLimit: 3,
-            chaDelLimit: 3,
-            roleDelLimit: 3,
-            kickLimits: 3,
-            roleCrLimits: 3
-        }
-        if (!anti[member.guild.id + entry.id]) {
-            anti[member.guild.id + entry.id] = {
-                actions: 1
-            }
-            setTimeout(() => {
-                anti[member.guild.id + entry.id].actions = "0"
-            }, config[member.guild.id].time * 1000)
         } else {
-            anti[member.guild.id + entry.id].actions = Math.floor(anti[member.guild.id + entry.id].actions + 1)
-            console.log("TETS");
-            setTimeout(() => {
-                anti[member.guild.id + entry.id].actions = "0"
-            }, config[member.guild.id].time * 1000)
-            if (anti[member.guild.id + entry.id].actions >= config[member.guild.id].kickLimits) {
-                member.members.get(entry.id).ban().catch(e => member.owner.send(`**⇏ | ${entry.username} حاول حظر جميع الأعضاء **`))
-                anti[member.guild.id + entry.id].actions = "0"
-                fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
-                    if (e) throw e;
-                });
-                fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
-                    if (e) throw e;
-                });
-            }
-        }
+            data[ss.executor.id].time+=1
+        };
+        if(antihack[u.guild.id].onoff === 'Off') return;
  
-        fs.writeFile("./config.json", JSON.stringify(config, null, 2), function (e) {
-            if (e) throw e;
-        });
-        fs.writeFile("./antigreff.json", JSON.stringify(anti, null, 2), function (e) {
-            if (e) throw e;
-        });
-    }
- 
-})
+  data[ss.executor.id].time = 0
+  u.guild.members.get(ss.executor.id).roles.forEach(r => {    
+                  r.edit({
+                      permissions : []  
+                  });
+                  data[ss.executor.id].time = 0
+              });
+          setTimeout(function(){
+              if (data[ss.executor.id].time <= 3) {
+                  data[ss.executor.id].time = 0
+              }
+          },60000)
+      };
+      });
+    const data = require("./data.json");
+  });
+  client.on('channelDelete', (u) => {   
+      u.guild.fetchAuditLogs().then( s => {  
+          var ss = s.entries.first();
+          if (ss.action == `CHANNEL_DELETE`) {  
+          if (!data[ss.executor.id]) {
+              data[ss.executor.id] = {  
+              time : 1
+            };
+            if(antihack[u.guild.id].onoff === 'Off') return;
+        } else {
+            data[ss.executor.id].time+=1
+        };
+        if(antihack[u.guild.id].onoff === 'Off') return;
+  data[ss.executor.id].time = 0
+  u.guild.members.get(ss.executor.id).roles.forEach(r => {
+                  r.edit({
+                      permissions : []
+                  });
+                  data[ss.executor.id].time = 0
+              });
+          setTimeout(function(){
+              if (data[ss.executor.id].time <= 3) {  
+                  data[ss.executor.id].time = 0
+              }
+          })
+      };
+      });  
+    const data = require("./data.json");
+  })
 
 client.on('message', message => {
     if (message.content.startsWith("-link")) {
@@ -2258,6 +2057,58 @@ client.on("guildMemberAdd", member => {
         
         message.channel.send(embedP);
     }
+});
+
+client.on('message', message => {
+ if(message.content.startsWith(prefix + 'hug')) {
+   let args = message.content.split(" ").slice(1);
+    let hug = [
+        "https://78.media.tumblr.com/28e86413485a973ae859a745a7a5382e/tumblr_o1hf0uK2NL1uapp8co1_500.gif",
+        "https://78.media.tumblr.com/18fdf4adcb5ad89f5469a91e860f80ba/tumblr_oltayyHynP1sy5k7wo1_500.gif",
+        "https://78.media.tumblr.com/e790af0168cd80394b7d792dde07407b/tumblr_o76qfcMiFn1sk1rjvo1_500.gif",
+        "https://78.media.tumblr.com/350c512200d6cbb6506774f2cddc9641/tumblr_ooonx9vM691qzxv73o1_500.gif",
+        "https://78.media.tumblr.com/5dfb67d0a674fe5f81950478f5b2d4ed/tumblr_ofd4e2h8O81ub9qlao1_500.gif",
+        "https://78.media.tumblr.com/21f89b12419bda49ce8ee33d50f01f85/tumblr_o5u9l1rBqg1ttmhcxo1_500.gif",
+        "https://78.media.tumblr.com/ebc214f892af851ffd7297e0e6212cdb/tumblr_o2kwkfyzT01uprh6zo1_500.gif",
+        "https://78.media.tumblr.com/5fa89acc3637b84a29c6f528c1727135/tumblr_o3kyyxj5nF1unech7o1_500.gif",
+        "https://78.media.tumblr.com/443c4235cae34242d014e2bb1276810d/tumblr_orldmdZJ2x1vb10byo1_500.gif",
+        "https://78.media.tumblr.com/b8ce553824c59700049256fbc825390b/tumblr_ojf72iRAty1v312ebo1_500.gif",
+        "https://78.media.tumblr.com/2fe074ad467af41a8230b8d9d8e322f1/tumblr_omvj49wYnq1v8tshbo1_500.gif",
+        "https://78.media.tumblr.com/9956a4b53345e4031faccf8174cadb68/tumblr_ozy26yVcBu1ql0375o1_500.gif",
+        "https://78.media.tumblr.com/14f5e0c6ef88280f75017987302a7dad/tumblr_o31a2iJsCw1uprh6zo1_500.gif",
+        "https://78.media.tumblr.com/5e2130af66f9c548059c6452d1b55e03/tumblr_p8zuex4xZo1qzxv73o1_500.gif",
+        "https://i.gifer.com/8WPN.mp4",
+        "https://i.gifer.com/GAMC.gif",
+    ]
+    let hugresult = Math.floor((Math.random() * hug.length));
+    if (!args[0]) {
+        const ghembed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+            .setTitle(`${message.author.username} Sorry to see you alone...`)
+            .setImage('https://78.media.tumblr.com/9d9be702d1dda0559809d920bf1d01d1/tumblr_inline_nrw2mfIFBh1qafrh6_400.gif')
+        message.channel.send({
+            embed: ghembed
+        })
+        return;
+     }
+    if (!message.mentions.members.first().user.username === message.isMentioned(message.author)) {
+        const hembed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+            .setTitle(`${message.mentions.members.first().user.username} you have been hugged by ${message.author.username}`)
+            .setImage(hug[hugresult])
+        message.channel.send({
+            embed: hembed
+        })
+        return;
+    }
+    const ghembed = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .setTitle(`${message.author.username} Sorry to see you alone...`)
+        .setImage('https://78.media.tumblr.com/9d9be702d1dda0559809d920bf1d01d1/tumblr_inline_nrw2mfIFBh1qafrh6_400.gif')
+    message.channel.send({
+        embed: ghembed
+    })
+}
 });
 
 client.on('guildMemberAdd', member => {
@@ -3645,13 +3496,17 @@ client.on("message", message => {
  if (message.content === "-help") {
   const embed = new Discord.RichEmbed()  
       .setColor("#000000") 
-      .setDescription(`**__
-	         قم بالاختيار: 
-${prefix}help public ⇏ اوامر عامة
-${prefix}help admin ⇏ اوامر ادارة السيرفر
-${prefix}help games ⇏ اوامر الالعاب
-${prefix}help protection ⇏ لعرض اوامر الحماية
-__**`)
+      .setDescription(`**
+█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
+█░░╦─╦╔╗╦─╔╗╔╗╔╦╗╔╗░░█
+█░░║║║╠─║─║─║║║║║╠─░░█
+█░░╚╩╝╚╝╚╝╚╝╚╝╩─╩╚╝░░█
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ 
+✴${prefix}help public ⇏ اوامر عامة
+✴${prefix}help admin ⇏ اوامر ادارة السيرفر
+✴${prefix}help games ⇏ اوامر الالعاب
+$✴{prefix}help other ⇏ اوامر اخرى
+**`)
    message.channel.sendEmbed(embed)
     
    }
@@ -3666,36 +3521,36 @@ __**`)
       .setDescription(`
       :busts_in_silhouette:***__اوامر عامة__***:loudspeaker: 
 **
- ✴-ping ====> لمعرفة سرعة اتصال البوت
-  ✴-link ====> يسويلك رابط لمدة يوم وعدد الاستخدامات 100
- ✴-tag ====> لعرض الكلام بشكل جميل و كبير
-  ✴-تقديم
- ✴-quran ====> لعرض 200 صفحة من القرآن الكريم
-  ✴-perms ====> لعرض صلاحياتك
- ✴-topinv ====> لعرض صاحب اكثر دعوات 
-  ✴-hypixel ====> لرؤية احصائياتك في هايبكسل
- ✴-contact ====> للتواصل مع صاحب البوت
-  ✴-clan ====> لعبة الكلانات
- ✴-report ====> للابلاغ عن احد
-  ✴-minv ====> لمعرفة عدد دعواتك
- ✴-colors ====> لعرض قائمة الالوان
-  ✴-color ====> لوضع لون لك
-  ✴-emojilist ====> لرؤية قائمة اموجيات السيرفر
- ✴-date ====> يعرضلك تاريخ اليوم
-  ✴-email ====> يعطيك ايميل و باس عشوائي
- ✴-gRole Role name ====> يوريك معلومات رتبة باسمها او الايدي حقها
-  ✴-bot ====> يعرض لك كل معلومات البوت
- ✴-say ====> يكرر الكلام الي تكتبو
-  ✴-savatar ====> صورة السيرفر
- ✴-id ====> معلومات عنك
-  ✴-ranks ====> يوريك رتب السيرفر
- ✴-send ====> ارسال رسالة لشخص المنشن
-  ✴-new ====> يفتح لك تكت
- ✴-avatar ====> صورتك او صورة الي تمنشنو
-  ✴-embed ====> يكرر الي تقولو بشكل حلو
- ✴-rules ====> يعرض لك قوانين السيرفر
-  ✴-v2min ====> لصنع روم صوتي مؤقت
- ✴-inv ====> لدعوة البوت الى سيرفرك
+ ✴-ping ====> لمعرفة سرعة اتصال البوت:rocket: 
+  ✴-link ====> يسويلك رابط لمدة يوم وعدد الاستخدامات 100:link: 
+ ✴-tag ====> لعرض الكلام بشكل جميل و كبير :ideograph_advantage: 
+  ✴-تقديم :innocent: 
+ ✴-quran ====> لعرض 200 صفحة من القرآن الكريم:kaaba: 
+  ✴-perms ====> لعرض صلاحياتك:crown: 
+ ✴-topinv ====> لعرض صاحب اكثر دعوات :top: 
+  ✴-hypixel ====> لرؤية احصائياتك في هايبكسل:game_die: 
+ ✴-contact ====> للتواصل مع صاحب البوت:call_me::skin-tone-1: 
+  ✴-clan ====> لعبة الكلانات:video_game: 
+ ✴-report ====> للابلاغ عن احد:police_car: 
+  ✴-minv ====> لمعرفة عدد دعواتك:inbox_tray: 
+ ✴-colors ====> لعرض قائمة الالوان:rainbow: 
+  ✴-color ====> لوضع لون لك:red_circle: 
+  ✴-emojilist ====> لرؤية قائمة اموجيات السيرفر:grinning: 
+ ✴-date ====> يعرضلك تاريخ اليوم:calendar: 
+  ✴-email ====> يعطيك ايميل و باس عشوائي:e_mail: 
+ ✴-gRole Role name ====> يوريك معلومات رتبة باسمها او الايدي حقها:scroll: 
+  ✴-bot ====> يعرض لك كل معلومات البوت:robot: 
+ ✴-say ====> يكرر الكلام الي تكتبو:repeat: 
+  ✴-savatar ====> صورة السيرفر:frame_photo: 
+ ✴-id ====> معلومات عنك:bust_in_silhouette: 
+  ✴-ranks ====> يوريك رتب السيرفر:large_orange_diamond: 
+ ✴-send ====> ارسال رسالة لشخص المنشن:mega: 
+  ✴-new ====> يفتح لك تكت:tickets: 
+ ✴-avatar ====> صورتك او صورة الي تمنشنو:camera: 
+  ✴-embed ====> يكرر الي تقولو بشكل حلو:envelope: 
+ ✴-rules ====> يعرض لك قوانين السيرفر:straight_ruler: 
+  ✴-v2min ====> لصنع روم صوتي مؤقت:timer: 
+ ✴-inv ====> لدعوة البوت الى سيرفرك:smirk: 
 **
 `)
    message.author.sendEmbed(embed)
@@ -3714,50 +3569,48 @@ __**`)
       .setDescription(`
       :key:***__اوامر ادارية__***:crown: 
 **
-  ❖-bc ====> رسالة لجميع اعضاء السيرفر بجميع انواعها
- ❖-setbot ====> لعمل روم صوتي بعدد البوتات في السيرفر
-  ❖-bans ====> الاعضاء المبندين من سيرفرك
- ❖-setmember ====> لعمل روم صوتي بعدد اعضاء السيرفر
-  ❖-cto ====> تغير الكلام في اعلى الروم
- ❖-leave ====> لطرد البوت من سيرفرك
-  ❖-setMedia ====> لتحديد روم الصور
- ❖-vonline ====> لعمل روم صوتي اونلاين
-  ❖-schannel ====> اضهار الشات المخفية
- ❖-setName Exemple ====> لتغيير اسم السيرفر
-  ❖-setIcon ====> لتغيير صورة السيرفر
- ❖-kv ====> لطرد عضو من روم صوتي
-  ❖-hchannel ====> اخفاء الشات
- ❖-count ====> عدد اعضاء السيرفر
-  ❖-ccolors ====> لصنع 50 لون
- ❖-setlog ====> لصنع روم اللوج
-  ❖-server ====> يعرض لك معلومات عن السيرفر
- ❖-movall ====> لسحب الجميع الى رومك
-  ❖-sug ====> لصنع اقتراح او توصويت يجب توفر روم الاقتراحات
- ❖-bs ====> لمعرفة سيرفرات البوت
-  ❖-rooms ====> لرؤية رومات السيرفر
- ❖-dc ====> مسح كل الرومات
-  ❖-setnick ====> لتغيير النيكنايم
- ❖-dr ====> مسح كل الرتب
-  ❖-del Exm ====> لمسح روم باسمها
+  ❖-bc ====> رسالة لجميع اعضاء السيرفر بجميع انواعها:inbox_tray: 
+ ❖-setbot ====> لعمل روم صوتي بعدد البوتات في السيرفر:robot: 
+  ❖-bans ====> الاعضاء المبندين من سيرفرك:no_pedestrians: 
+ ❖-setmember ====> لعمل روم صوتي بعدد اعضاء السيرفر:busts_in_silhouette: 
+  ❖-cto ====> تغير الكلام في اعلى الروم:point_up_2::skin-tone-1: 
+ ❖-leave ====> لطرد البوت من سيرفرك:door: 
+ ❖-vonline ====> لعمل روم صوتي اونلاين:calling: 
+  ❖-schannel ====> اضهار الشات المخفية:eye_in_speech_bubble: 
+ ❖-setName Exemple ====> لتغيير اسم السيرفر:name_badge: 
+  ❖-setIcon ====> لتغيير صورة السيرفر:movie_camera: 
+ ❖-kv ====> لطرد عضو من روم صوتي:outbox_tray: 
+  ❖-hchannel ====> اخفاء الشات:no_entry: 
+ ❖-count ====> عدد اعضاء السيرفر:zero: 
+  ❖-ccolors ====> لصنع 50 لون:rainbow: 
+ ❖-setlog ====> لصنع روم اللوج:tools: 
+  ❖-server ====> يعرض لك معلومات عن السيرفر:gear: 
+ ❖-movall ====> لسحب الجميع الى رومك:runner::skin-tone-1: 
+  ❖-sug ====> لصنع اقتراح او توصويت يجب توفر روم الاقتراحات:question: 
+ ❖-bs ====> لمعرفة سيرفرات البوت:smile: 
+  ❖-rooms ====> لرؤية رومات السيرفر:homes: 
+ ❖-dc ====> مسح كل الرومات:wastebasket: 
+  ❖-setnick ====> لتغيير النيكنايم:name_badge: 
+ ❖-dr ====> مسح كل الرتب:oil: 
+  ❖-del Exm ====> لمسح روم باسمها:scissors: 
  ❖-allbots ====> يوريك كل البوتات في سيرفرك
-  ❖-move ====> لسحب عضو الى روم صوتية
- ❖-giveaway ====> لصنع جيفواي
-  ❖-role @mention rolename ====> لأعطاء رتبة لعضو معين
- ❖-role all rolename ====> لأعطاء رتبة للجميع
-  ❖-role humans rolename ====> لأعطاء رتبة للاشخاص فقط
- ❖-role bots rolename ====> لأعطاء رتبة لجميع البوتات
-  ❖-members ====> حالات اعضاء السيرفر
- ❖-clr <numbr> ====> مسح الشات بعدد
-❖-clear ====> مسح الشات
- ❖antibots on/off  ====> لتشغيل او اطفاء مضاد البوتات
-  ❖-mute @user <reason> ====> اعطاء العضو ميوت لازم رتبة <Muted>
- ❖-unmute @user ====> لفك الميوت عن الشخص 
-  ❖-kick @user <reason> ====> طرد الشخص من السيرفر
- ❖-ban @user <reason> ====> حضر الشخص من السيرفر
-  ❖-unban @user ====> لفك حضر الشخص من السيرفر
- ❖-mchannel ====> تقفيل الشات
-  ❖-unmchannel ====> فتح الشات
- ❖-croom ====> لصنع روم بنوعيه
+  ❖-move ====> لسحب عضو الى روم صوتية:robot: 
+ ❖-giveaway ====> لصنع جيفواي:tada: 
+  ❖-role @mention rolename ====> لأعطاء رتبة لعضو معين:bust_in_silhouette: 
+ ❖-role all rolename ====> لأعطاء رتبة للجميع:busts_in_silhouette: 
+  ❖-role humans rolename ====> لأعطاء رتبة للاشخاص فقط:man::skin-tone-1: 
+ ❖-role bots rolename ====> لأعطاء رتبة لجميع البوتات:robot: 
+  ❖-members ====> حالات اعضاء السيرفر:large_blue_circle: 
+ ❖-clr <numbr> ====> مسح الشات بعدد:shower: 
+❖-clear ====> مسح الشات:wastebasket: 
+  ❖-mute @user <reason> ====> اعطاء العضو ميوت لازم رتبة <Muted>:mute: 
+ ❖-unmute @user ====> لفك الميوت عن الشخص :speaking_head: 
+  ❖-kick @user <reason> ====> طرد الشخص من السيرفر:door: 
+ ❖-ban @user <reason> ====> حضر الشخص من السيرفر:no_entry_sign: 
+  ❖-unban @user ====> لفك حضر الشخص من السيرفر:ballot_box_with_check: 
+ ❖-mchannel ====> تقفيل الشات:negative_squared_cross_mark: 
+  ❖-unmchannel ====> فتح الشات:white_check_mark: 
+ ❖-croom ====> لصنع روم بنوعيه:new: 
 **
 `)
    message.author.sendEmbed(embed)
@@ -3776,28 +3629,29 @@ __**`)
       .setDescription(`
        :video_game: ***__اوامر العاب__***:game_die:
  **       
- 💠-8ball ====> لعبه تسال البوت اسال  وهو يجاوب عنها
-  💠-هل تعلم
- 💠-cal ====> ألة حاسبة
-  💠-za5 ====> لزخرفة ما تقول
- 💠-cats ====> قطط كيوت
-  💠-love ====> يعطيك اقوال عن الحب 
- 💠-جمع
-  💠-اذكار
- 💠-طرح
-  💠-لو خيروك
- 💠-ضرب
-  💠-فواكه
-  💠-كت
-  💠-sara7a ====> لعبة صراحة
- 💠-roll ====> قرعة
-  💠-نكت مضحكه ====> نكت
- 💠-kiss ====> ما يحتاج شرح ههههه
-  💠-marry ====> لعبة الزواج
- 💠-hack ====> لعبه هاك
-  💠-kill ====> لعبة قتل
- 💠-quas ====> اسئلة عامة
-  💠-لعبة مريم ====> مريم
+ 💠-8ball ====> لعبه تسال البوت اسال  وهو يجاوب عنها:video_game:
+  💠-هل تعلم:video_game:
+ 💠-cal ====> ألة حاسبة:video_game:
+  💠-za5 ====> لزخرفة ما تقول:video_game:
+ 💠-cats ====> قطط كيوت:video_game:
+  💠-love ====> يعطيك اقوال عن الحب:video_game: 
+ 💠-جمع:video_game:
+  💠-اذكار:video_game:
+ 💠-طرح:video_game:
+  💠-لو خيروك:video_game:
+ 💠-ضرب:video_game:
+  💠-فواكه:video_game:
+  💠-كت:video_game:
+  💠-hug ====> لاعطاء شخص حضن:video_game:
+  💠-sara7a ====> لعبة صراحة:video_game:
+ 💠-roll ====> قرعة:video_game:
+  💠-نكت مضحكه ====> نكت:video_game:
+ 💠-kiss ====> ما يحتاج شرح ههههه:video_game:
+  💠-marry ====> لعبة الزواج:video_game:
+ 💠-hack ====> لعبه هاك:video_game:
+  💠-kill ====> لعبة قتل:video_game:
+ 💠-quas ====> اسئلة عامة:video_game:
+  💠-لعبة مريم ====> مريم:video_game:
    
 **
 `)
@@ -3808,19 +3662,18 @@ __**`)
  
   client.on("message", message => {
 	var prefix = "-";
- if (message.content === "-help protection") {
+ if (message.content === "-help other") {
 	  message.channel.send('**تم ارسال الاوامر في الخاص** :mailbox_with_mail: ');
   const embed = new Discord.RichEmbed() 
       .setColor("#000000")
       .setDescription(`
-       :closed_lock_with_key: ***__اوامر الحماية__***:key:
+       :tools: ***__اوامر اخرى__***:interrobang:
  **       
 ۞-antibots on/off  ====> لتشغيل او اطفاء مانع ادخال البوتات
-۞-limitbans ====> لتحديد الحد الاقصى لتبنيد الاعضاء
-۞-limitkicks ====> لتحديد الحد الاقصى لطرد الاعضاء 
-۞-limitroleDelete ====> لتحديد الحد الاقصى لحذف الرتب
-۞-limitroleCreate ====> لتحديد الحد الاقصى لعمل الرتب 
-۞-limitchannelDelete ====> لتحديد الحد الاقصى لحذف الرومات 
+۞-tAntihack ====> لتشغيل مضاد الهكر
+۞-setMedia ====> لتحديد روم الصور
+toggleMedia ====> لفتح روم الصور
+۞-infomedia ====> معلومات عن روم الصور
 **
 `)
    message.author.sendEmbed(embed)
