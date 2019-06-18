@@ -2412,17 +2412,7 @@ const Sra7a = [
  }
 });
 
-client.on('message', message => {
-              if (!message.channel.guild) return;
-      if(message.content =='-count')
-      var IzRo = new Discord.RichEmbed()
-      .setThumbnail(message.author.avatarURL)
-      .setFooter(message.author.username, message.author.avatarURL)
-      .setTitle('🌍| Members info')
-      .addBlankField(true)
-      .addField('Mmeber Count',`${message.guild.memberCount}`)
-      message.channel.send(IzRo);
-    });
+
 
 client.on('message', msg => {
   if (msg.author.bot) return;
@@ -2650,7 +2640,7 @@ client.on('guildCreate', guild => {
 
 const devs = ["524901565472047116"]
  
-const adminprefix = "-";
+const adminprefix = "+";
 client.on('message', message => {
     var argresult = message.content.split(` `).slice(1).join(' ');
       if (!devs.includes(message.author.id)) return;
@@ -3571,26 +3561,24 @@ client.on("message", message => {
 **
   ❖-bc ====> رسالة لجميع اعضاء السيرفر بجميع انواعها:inbox_tray: 
  ❖-setbot ====> لعمل روم صوتي بعدد البوتات في السيرفر:robot: 
-  ❖-bans ====> الاعضاء المبندين من سيرفرك:no_pedestrians: 
- ❖-setmember ====> لعمل روم صوتي بعدد اعضاء السيرفر:busts_in_silhouette: 
-  ❖-cto ====> تغير الكلام في اعلى الروم:point_up_2::skin-tone-1: 
+  ❖-bans ====> الاعضاء المبندين من سيرفرك
+ ❖-setmember ====> لعمل روم صوتي بعدد اعضاء السيرفر
+  ❖-cto ====> تغير الكلام في اعلى الروم
  ❖-leave ====> لطرد البوت من سيرفرك:door: 
  ❖-vonline ====> لعمل روم صوتي اونلاين:calling: 
-  ❖-schannel ====> اضهار الشات المخفية:eye_in_speech_bubble: 
+  ❖-schannel ====> اضهار الشات المخفية
  ❖-setName Exemple ====> لتغيير اسم السيرفر 
   ❖-setIcon ====> لتغيير صورة السيرفر:movie_camera: 
  ❖-kv ====> لطرد عضو من روم صوتي:outbox_tray: 
   ❖-hchannel ====> اخفاء الشات:no_entry: 
- ❖-count ====> عدد اعضاء السيرفر
   ❖-ccolors ====> لصنع 50 لون:rainbow: 
  ❖-setlog ====> لصنع روم اللوج
   ❖-server ====> يعرض لك معلومات عن السيرفر:gear: 
  ❖-movall ====> لسحب الجميع الى رومك:
   ❖-sug ====> لصنع اقتراح او توصويت يجب توفر روم الاقتراحات
  ❖-bs ====> لمعرفة سيرفرات البوت:smile: 
-  ❖-rooms ====> لرؤية رومات السيرفر:homes: 
  ❖-dc ====> مسح كل الرومات:wastebasket: 
-  ❖-setnick ====> لتغيير النيكنايم:name_badge: 
+  ❖-setnick ====> لتغيير النيكنايم
  ❖-dr ====> مسح كل الرتب:oil: 
   ❖-del Exm ====> لمسح روم باسمها:scissors: 
  ❖-allbots ====> يوريك كل البوتات في سيرفرك
