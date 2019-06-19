@@ -4726,7 +4726,7 @@ client.on("message", message => {
 ✴${prefix}help public ⇏ اوامر عامة :busts_in_silhouette:        
 ✴${prefix}help admin ⇏ اوامر ادارة السيرفر :crown: 
 ✴${prefix}help games ⇏ اوامر الالعاب :game_die:
-✴${prefix}help gif ⇏ gif العاب ال :D
+✴${prefix}help gif ⇏ gif العاب ال :hugging: 
 ✴${prefix}help other ⇏ اوامر اخرى :interrobang:
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ 
 **`)
@@ -4742,7 +4742,6 @@ client.on("message", message => {
  if (message.content === "-help public") {
 	 message.channel.send('**تم ارسال الاوامر في الخاص** :mailbox_with_mail: ');
   const embed = new Discord.RichEmbed() 
-      .setAuthor(member.user.username, member.user.avatarURL)  
       .setColor("#000000")
       .setDescription(`
       :busts_in_silhouette:***__اوامر عامة__***:loudspeaker: 
@@ -4793,7 +4792,6 @@ client.on("message", message => {
  if (message.content === "-help admin") {
 	  message.channel.send('**تم ارسال الاوامر في الخاص** :mailbox_with_mail: ');
   const embed = new Discord.RichEmbed() 
-      .setAuthor(member.user.username, member.user.avatarURL)
       .setColor("#000000")
       .setDescription(`
       :key:***__اوامر ادارية__***:crown: 
@@ -4854,7 +4852,6 @@ client.on("message", message => {
  if (message.content === "-help games") {
 	  message.channel.send('**تم ارسال الاوامر في الخاص** :mailbox_with_mail: ');
   const embed = new Discord.RichEmbed() 
-      .setAuthor(member.user.username, member.user.avatarURL)
       .setColor("#000000")
       .setDescription(`
        :video_game: ***__اوامر العاب__***:game_die:
@@ -4892,7 +4889,6 @@ client.on("message", message => {
  if (message.content === "-help other") {
 	  message.channel.send('**تم ارسال الاوامر في الخاص** :mailbox_with_mail: ');
   const embed = new Discord.RichEmbed()
-       .setAuthor(member.user.username, member.user.avatarURL)  
       .setColor("#000000")
       .setDescription(`
        :tools: ***__اوامر اخرى__***:interrobang:
