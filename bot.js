@@ -4718,8 +4718,7 @@ client.on("message", message => {
 	var prefix = "-";
  if (message.content === "-help") {
      message.react("✅")
-  const embed = new Discord.RichEmbed() 
-      .setAuthor(member.user.username, member.user.avatarURL)  
+  const embed = new Discord.RichEmbed()  
       .setColor("#000000")	  
       .setDescription(`**
 █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
