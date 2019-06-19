@@ -3320,28 +3320,6 @@ if(!message.channel.guild) return message.reply(' ');
                 collected.first().delete();
  
               boi2 = collected.first().content;
-			  
-			              let boi3;
- 
-            msg.edit('🤵 **| بماذا يمكنك المساعدة في حال قبولك ؟... ✏ **').then(msg => {
- 
- 
- 
-              message.channel.awaitMessages(filter, {
- 
-                max: 1,
- 
-                time: 90000,
- 
-                errors: ['time']
- 
-              })
- 
-              .then(collected => {
- 
-                collected.first().delete();
- 
-              boi3 = collected.first().content;
  
       msg.edit('🛡 **| [ هل انت متأكد من تقديمك؟ | [ نعم ] او [ لا**');
  
@@ -3365,7 +3343,7 @@ if(!message.channel.guild) return message.reply(' ');
  
           thisFalse = false;
  
-  1      }
+        }
  
         if(collected.first().content === 'نعم') {
  
@@ -3387,9 +3365,6 @@ ${boi}
  
 [**من بلد**]:
 ${boi2}
- 
- [**..يمكنه المساعدة ب**]:
-${boi3}
  
 [**تم التقديم بواسطة**]:
 ${message.author}
@@ -3417,7 +3392,7 @@ ${message.author.id}`);
  
 );
  
-    })})});
+    })}});
    
    client.on('message', message => {
 	var prefix = "-";
