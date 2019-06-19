@@ -4913,7 +4913,6 @@ client.on("message", message => {
  if (message.content === "-help gif") {
 	  message.channel.send('**تم ارسال الاوامر في الخاص** :mailbox_with_mail: ');
   const embed = new Discord.RichEmbed()
-       .setAuthor(member.user.username, member.user.avatarURL)  
       .setColor("#000000")
       .setDescription(`
        :tools: ***__gif العاب ال__***:interrobang:
