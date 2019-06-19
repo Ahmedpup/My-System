@@ -3417,7 +3417,7 @@ ${message.author.id}`);
  
 );
  
-    })}});
+    })})});
    
    client.on('message', message => {
 	var prefix = "-";
