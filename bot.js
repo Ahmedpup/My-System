@@ -3904,7 +3904,7 @@ if(!args[0]) return message.reply('Write Some Things');
 
 
 
-client.on('message',  (message) => {
+client.on('message', message => {
         if(message.content.startsWith('-kiss')) {
   let user = message.mentions.users.first();
   if (!user) {
@@ -4914,7 +4914,7 @@ client.on("message", message => {
 	  message.channel.send('**تم ارسال الاوامر في الخاص** :mailbox_with_mail: ');
   const embed = new Discord.RichEmbed()
       .setColor("#000000")
-      .setDescription(`
+      .setDescription(`**
        :tools: ***__gif العاب ال__***:interrobang:
  **       
  ۩-hug
@@ -4925,7 +4925,7 @@ client.on("message", message => {
  ۩-pat
  ۩-cats
  ۩-cuddle
-`)
+**`)
    message.author.sendEmbed(embed)
     
    }
@@ -5956,6 +5956,32 @@ if(!user) return msg.channel.send('``' + '**قم بتحديد بوت**' + '``')
 if(!user.bot) return msg.reply('`منشن بوت`');
 msg.channel.send(`**Bot InviteURL : ** https://discordap-com/oauth2/authorize?client_id=${user.id}&scope=bot&permissions=384064`)
     }
+});
+
+client.on('message', async message => {
+  let mention = message.mentions.members.first();
+let command = message.content.split(" ")[0];
+   command = command.slice(prefix.length);
+  let args = message.content.split(" ").slice(1);	 
+	if (message.content === "-unmute") {
+    if(!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.sendMessage("**You Donot HavePermission Mute_Members**").then(m => m.delete(5000));
+if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return message.reply("**I donot Have Permission Mute_Members**").then(msg => msg.delete(6000))
+
+  let kinggamer = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+     if(!kinggamer) return message.channel.send('Mention Someone')
+
+
+  let role = message.guild.roles.find (r => r.name === "Muted");
+  
+  if(!role || !kinggamer.roles.has(role.id)) return message.channel.sendMessage(`**:information_source:${mention.user.username} لقد تم فك الميوت عنه مسبقا**`)
+
+  await kinggamer.removeRole(role) 
+  message.channel.sendMessage(`**:white_check_mark: ${mention.user.username}  Unmute> **`);
+  
+  return;
+
+  }
+
 });
 
 client.on("message", message => {
