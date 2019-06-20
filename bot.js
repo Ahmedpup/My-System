@@ -3124,7 +3124,7 @@ var jimp = require('jimp')
 
 client.on('message', message => {
 
-    if(message.content.startsWith(prefix + '2id')) {
+    if(message.content.startsWith(prefix + 'id')) {
 if(!message.channel.guild) return;
       var args = message.content.split(" ").slice(1);
       let user = message.mentions.users.first();
@@ -3176,7 +3176,7 @@ if(!message.channel.guild) return;
             
         
                           //دخولك الديسكورد
-                          var day = `منذ ${days.toFixed(0)} يوم`
+                          var day = `from ${days.toFixed(0)} days`
                           ctx.font = '27px Arial Bold';
                           ctx.fontSize = '30px';
                           ctx.fillStyle = "#ffffff";
@@ -3194,7 +3194,7 @@ if(!message.channel.guild) return;
   const days1 = millis1 / 1000 / 60 / 60 / 24;
   
                         //دخولك السيرفر
-                        var day2 = `منذ ${days1.toFixed(0)} يوم`
+                        var day2 = `from ${days1.toFixed(0)} days`
                         ctx.font = '27px Arial Bold';
                         ctx.fontSize = '20px';
                         ctx.fillStyle = "#ffffff";
@@ -3217,13 +3217,13 @@ if(!message.channel.guild) return;
                         //حالتك
                            let status;
     if (h.presence.status === 'online') {
-        status = 'اون لاين';
+        status = 'online';
     } else if (h.presence.status === 'dnd') {
-        status = 'مشغول';
+        status = 'dnd';
     } else if (h.presence.status === 'idle') {
-        status = 'خمول';
+        status = 'idle';
     } else if (h.presence.status === 'offline') {
-        status = 'اوف لاين';
+        status = 'offline';
     }
                         ctx.font = '27px Arial Bold';
                         ctx.fontSize = '30px';
@@ -3231,7 +3231,7 @@ if(!message.channel.guild) return;
                         ctx.textAlign = "center";
                         ctx.fillText(`${status}`, 380, 450);
                         
-                        //Avatar
+                        
                         let Avatar = Canvas.Image;
                         let ava = new Avatar;
                         ava.src = buf;
