@@ -1854,13 +1854,21 @@ client.on("message", msg => {
   }
 });
 
-client.on('message',function(message) {
-	let prefix =  "-";
-let args = message.content.split(" ").slice(1).join(" ");
-if(message.content.startsWith(prefix + "say")) {
-if(!args) return;
-message.channel.send(`**# ${args}**`);
-}
+client.on('message' , async (message) => {
+ if (message.content.startsWith(prefix + 'say')) {
+  const args = message.content.substring(prefix.length).split(' ');
+
+ message.delete();
+args.shift() 
+let msg = args.join(' ') 
+message.channel.createWebhook(message.author.username, message.author.avatarURL) 
+    .then(wb => {
+        const user = new Discord.WebhookClient(wb.id, wb.token) 
+        user.send(msg); 
+        user.delete() 
+    })
+    .catch(console.error)
+ }
 });
 
 client.on('message', message => {
