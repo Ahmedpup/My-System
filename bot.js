@@ -3143,7 +3143,7 @@ if(!message.channel.guild) return;
              h = message.member
          }
   moment.locale('ar');
-    const w = ['../id1.png']
+    const w = ['./id1.png']
         let Image = Canvas.Image,
             canvas = new Canvas(500, 500),
             ctx = canvas.getContext('2d');
