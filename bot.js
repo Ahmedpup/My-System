@@ -3175,7 +3175,7 @@ message.channel.send(embed)
         return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
     };
     message.channel.send('**You have 15 seconds to resolve the question**').then(msg => {
- const w = ['./img/math.png'];
+ const w = ['./math.png'];
             let Image = Canvas.Image,
             canvas = new Canvas(400, 150),
             ctx = canvas.getContext('2d');
