@@ -4,7 +4,6 @@ const moment = require('moment');
 const zalgo = require('zalgolize');
 const math = require('math-expression-evaluator');  
 const figlet = require('figlet'); 
-const Canvas = require('canvas')
 const fs = require('fs');
 const ms = require('ms');
 const prefix = '-'
@@ -1854,13 +1853,21 @@ client.on("message", msg => {
   }
 });
 
-client.on('message',function(message) {
-	let prefix =  "-";
-let args = message.content.split(" ").slice(1).join(" ");
-if(message.content.startsWith(prefix + "say")) {
-if(!args) return;
-message.channel.send(`**# ${args}**`);
-}
+client.on('message' , async (message) => {
+ if (message.content.startsWith(prefix + 'say')) {
+  const args = message.content.substring(prefix.length).split(' ');
+
+ message.delete();
+args.shift() 
+let msg = args.join(' ') 
+message.channel.createWebhook(message.author.username, message.author.avatarURL) 
+    .then(wb => {
+        const user = new Discord.WebhookClient(wb.id, wb.token) 
+        user.send(msg); 
+        user.delete() 
+    })
+    .catch(console.error)
+ }
 });
 
 client.on('message', message => {
@@ -3159,34 +3166,26 @@ message.channel.send(embed)
      }
        });
    
-
-   
- client.on('message', message => {
-	  if(message.author.bot) return;
-      if (!points[message.author.id]) points[message.author.id] = {
-             points: 0,id: message.author.id
-           };
-    if (message.content.startsWith(prefix + 'math')) {
-      if(!message.channel.guild) return message.reply('**This Command For Servers Only**').then(m => m.delete(3000));
+   client.on('message', msg => {
+	var  prefix = "-";
+ if (msg.content.startsWith(prefix + 'math')) {
+    let args = msg.content.split(" ").slice(1);
+        const question = args.join(' ');
+    if (args.length < 1) {
+        msg.reply('Specify a equation, please.');
+} else {    let answer;
+    try {
+        answer = math.eval(question);
+    } catch (err) {
+        msg.reply(`Error: ${err}`);
+    }
     
-    const type = require('./math.json');
-    const item = type[Math.floor(Math.random() * type.length)];
-    const filter = response => {
-        return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
-    };
-    message.channel.send('**You have 15 seconds to resolve the question**').then(msg => {
- const w = ['./math.png'];
-            let Image = Canvas.Image,
-            canvas = new Canvas(400, 150),
-            ctx = canvas.getContext('2d');
-    
-            fs.readFile(`${w[Math.floor(Math.random() * w.length)]}`, function (err, Background) {
-            if (err) return console.log(err);
-            let BG = Canvas.Image;
-            let ground = new Image;
-            ground.src = Background;
-            ctx.drawImage(ground, 0, 0, 400, 150);
- 
+    const embed = new Discord.RichEmbed()
+    .addField("**Input**: ",`**${question}**`, true)
+    .addField("**Output**: ",`**${answer}**`, true)
+    msg.channel.send(embed)
+    }
+};
 });
    
    client.on('message', omar => {
@@ -4777,7 +4776,7 @@ client.on("message", message => {
  **       
  💠-8ball ====> لعبه تسال البوت اسال  وهو يجاوب عنها:video_game:
   💠-هل تعلم:video_game:
- 💠-cal ====> ألة حاسبة:video_game:
+ 💠-math ====> ألة حاسبة:video_game:
   💠-za5 ====> لزخرفة ما تقول:video_game:
   💠-love ====> يعطيك اقوال عن الحب:video_game: 
  💠-جمع:video_game:
@@ -6183,7 +6182,7 @@ reaction1.on("collect", r => {
     message.reply("**# - Done! 🎇**");
 })
 reaction2.on("collect", r => {
-    message.reply("**# - Canceled!**");
+     message.reply("**# - Canceled!**");
 })
 })
 }
