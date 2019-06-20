@@ -1854,21 +1854,13 @@ client.on("message", msg => {
   }
 });
 
-client.on('message' , async (message) => {
- if (message.content.startsWith(prefix + 'say')) {
-  const args = message.content.substring(prefix.length).split(' ');
-
- message.delete();
-args.shift() 
-let msg = args.join(' ') 
-message.channel.createWebhook(message.author.username, message.author.avatarURL) 
-    .then(wb => {
-        const user = new Discord.WebhookClient(wb.id, wb.token) 
-        user.send(msg); 
-        user.delete() 
-    })
-    .catch(console.error)
- }
+client.on('message',function(message) {
+	let prefix =  "-";
+let args = message.content.split(" ").slice(1).join(" ");
+if(message.content.startsWith(prefix + "say")) {
+if(!args) return;
+message.channel.send(`**# ${args}**`);
+}
 });
 
 client.on('message', message => {
@@ -3167,27 +3159,7 @@ message.channel.send(embed)
      }
        });
    
-   client.on('message', msg => {
-	var  prefix = "-";
- if (msg.content.startsWith(prefix + 'math')) {
-    let args = msg.content.split(" ").slice(1);
-        const question = args.join(' ');
-    if (args.length < 1) {
-        msg.reply('Specify a equation, please.');
-} else {    let answer;
-    try {
-        answer = math.eval(question);
-    } catch (err) {
-        msg.reply(`Error: ${err}`);
-    }
-    
-    const embed = new Discord.RichEmbed()
-    .addField("**Input**: ",`**${question}**`, true)
-    .addField("**Output**: ",`**${answer}**`, true)
-    msg.channel.send(embed)
-    }
-};
-});
+
    
    client.on('message', omar => {
 var prefix = "-";
@@ -3435,10 +3407,10 @@ if(message.content.startsWith(prefix+"userinfo")) {
         stat = 0xF7C035;
     }
     const embed = new Discord.RichEmbed()
-  .addField('**معلومات المستخدم:**', `** الاسم الكامل:** ${user.username}#${user.discriminator}\n**دخل الدسكورد في:** ${joineddiscord}\n**اخر دخول له:** ${messag}\n**يلعب:** ${game}\n**Status:** ${status}\n**هل هو بوت ؟** ${user.bot}`, true)
+  .addField('**UserInfo:**', `**name:** ${user.username}#${user.discriminator}\n**JoinedDiscord:** ${joineddiscord}\n**LastMessage:** ${messag}\n**Playing:** ${game}\n**Status:** ${status}\n**Bot?** ${user.bot}`, true)
   .setThumbnail(user.displayAvatarURL)
-  .addField(`الرتب:`, message.guild.members.get(user.id).roles.array(role => role.name).slice(1).join(', '))
-  .addField('معلومات الدسكورد:', `**التاغ:** #${user.discriminator}\n**ID ال:** ${user.id}\n**الاسم:** ${user.username}`)
+  .addField(`Roles:`, message.guild.members.get(user.id).roles.array(role => role.name).slice(1).join(', '))
+  .addField('DiscordInfo:', `**Discriminator:** #${user.discriminator}\n**ID:** ${user.id}\n**Username:** ${user.username}`)
   .setAuthor(`معلومات ${user.username}`, user.displayAvatarURL)
   .setColor(stat);
     message.channel.send({embed})
@@ -4777,7 +4749,7 @@ client.on("message", message => {
  **       
  💠-8ball ====> لعبه تسال البوت اسال  وهو يجاوب عنها:video_game:
   💠-هل تعلم:video_game:
- 💠-math ====> ألة حاسبة:video_game:
+ 💠-cal ====> ألة حاسبة:video_game:
   💠-za5 ====> لزخرفة ما تقول:video_game:
   💠-love ====> يعطيك اقوال عن الحب:video_game: 
  💠-جمع:video_game:
