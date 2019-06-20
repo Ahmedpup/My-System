@@ -4,6 +4,7 @@ const moment = require('moment');
 const zalgo = require('zalgolize');
 const math = require('math-expression-evaluator');  
 const figlet = require('figlet'); 
+const Canvas = require('canvas')
 const fs = require('fs');
 const ms = require('ms');
 const prefix = '-'
@@ -3158,28 +3159,34 @@ message.channel.send(embed)
      }
        });
    
- 
+
    
-   client.on('message', msg => {
-	var  prefix =  "-";
- if (msg.content.startsWith(prefix + 'cal')) {
-    let args = msg.content.split(" ").slice(1);
-        const question = args.join(' ');
-    if (args.length < 1) {
-        msg.reply('Specify a equation, please.');
-} else {    let answer;
-    try {
-        answer = math.eval(question);
-    } catch (err) {
-        msg.reply(`Error: ${err}`);
-    }
+ client.on('message', message => {
+	  if(message.author.bot) return;
+      if (!points[message.author.id]) points[message.author.id] = {
+             points: 0,id: message.author.id
+           };
+    if (message.content.startsWith(prefix + 'math')) {
+      if(!message.channel.guild) return message.reply('**This Command For Servers Only**').then(m => m.delete(3000));
     
-    const embed = new Discord.RichEmbed()
-    .addField("**Input**: ",`**${question}**`, true)
-    .addField("**Output**: ",`**${answer}**`, true)
-    msg.channel.send(embed)
-    }
-};
+    const type = require('./math.json');
+    const item = type[Math.floor(Math.random() * type.length)];
+    const filter = response => {
+        return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
+    };
+    message.channel.send('**You have 15 seconds to resolve the question**').then(msg => {
+ const w = ['./img/math.png'];
+            let Image = Canvas.Image,
+            canvas = new Canvas(400, 150),
+            ctx = canvas.getContext('2d');
+    
+            fs.readFile(`${w[Math.floor(Math.random() * w.length)]}`, function (err, Background) {
+            if (err) return console.log(err);
+            let BG = Canvas.Image;
+            let ground = new Image;
+            ground.src = Background;
+            ctx.drawImage(ground, 0, 0, 400, 150);
+ 
 });
    
    client.on('message', omar => {
