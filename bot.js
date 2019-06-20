@@ -4,6 +4,7 @@ const moment = require('moment');
 const zalgo = require('zalgolize');
 const math = require('math-expression-evaluator');  
 const figlet = require('figlet'); 
+const Canvas = require('canvas')
 const fs = require('fs');
 const ms = require('ms');
 const prefix = '-'
@@ -3434,10 +3435,10 @@ if(message.content.startsWith(prefix+"userinfo")) {
         stat = 0xF7C035;
     }
     const embed = new Discord.RichEmbed()
-  .addField('**UserInfo:**', `**name:** ${user.username}#${user.discriminator}\n**JoinedDiscord:** ${joineddiscord}\n**LastMessage:** ${messag}\n**Playing:** ${game}\n**Status:** ${status}\n**Bot?** ${user.bot}`, true)
+  .addField('**معلومات المستخدم:**', `** الاسم الكامل:** ${user.username}#${user.discriminator}\n**دخل الدسكورد في:** ${joineddiscord}\n**اخر دخول له:** ${messag}\n**يلعب:** ${game}\n**Status:** ${status}\n**هل هو بوت ؟** ${user.bot}`, true)
   .setThumbnail(user.displayAvatarURL)
-  .addField(`Roles:`, message.guild.members.get(user.id).roles.array(role => role.name).slice(1).join(', '))
-  .addField('DiscordInfo:', `**Discriminator:** #${user.discriminator}\n**ID:** ${user.id}\n**Username:** ${user.username}`)
+  .addField(`الرتب:`, message.guild.members.get(user.id).roles.array(role => role.name).slice(1).join(', '))
+  .addField('معلومات الدسكورد:', `**التاغ:** #${user.discriminator}\n**ID ال:** ${user.id}\n**الاسم:** ${user.username}`)
   .setAuthor(`معلومات ${user.username}`, user.displayAvatarURL)
   .setColor(stat);
     message.channel.send({embed})
