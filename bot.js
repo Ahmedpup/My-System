@@ -4000,34 +4000,7 @@ client.on('message', message => {
         });
 
    
-client.on('message', message => {
-if(!message.channel.guild) return;
-  if(message.content.startsWith(prefix + 'setRainbow')) {
-	  let role = message.guild.roles.find('name', 'Rainbow bot.')
-    if(role) return message.channel.send(`الرتبة موجودة بالفعل !`)
-  
-  if(!role){
-    rainbow =  message.guild.createRole({
-   name: "Rainbow bot.",
-   color: "#000000",
-   permissions:[]
 
-})
-
-}
-message.channel.send('**تم صناعة رتبة الرينبو**')
-}})
-
-client.on('ready', () => {
-  setInterval(function(){
-      client.guilds.forEach(g => {
-                  var role = g.roles.find('name', 'Rainbow bot.');
-                  if (role) {
-                      role.edit({color : "RANDOM"});
-                  };
-      });
-  }, 5000);
-})
 
 const afk = require('./afk.json');
 client.on('message',async rebel => {
@@ -4830,7 +4803,6 @@ client.on("message", message => {
   ❖-afk ====> لوضع شخص في وضع afk
  ❖-leave ====> لطرد البوت من سيرفرك:door: 
   ❖-schannel ====> اضهار الشات المخفية
-  ❖-setRainbow  ====> صنع رتبة قوس قزح
    ❖-deletecolors  ====> حذف الالوان
 ❖-setDate ====> لصنع روم اليوم
 ❖-setTime ====> لصنع روم الوقت
