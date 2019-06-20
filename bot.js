@@ -3143,7 +3143,7 @@ if(!message.channel.guild) return;
              h = message.member
          }
   moment.locale('ar');
-    const w = ['./id1.png']
+    const w = ['./id1.png','./id2.png','./id3.png','./id4.png','./id5.png']
         let Image = Canvas.Image,
             canvas = new Canvas(500, 500),
             ctx = canvas.getContext('2d');
@@ -3231,7 +3231,7 @@ if(!message.channel.guild) return;
                         ctx.textAlign = "center";
                         ctx.fillText(`${status}`, 380, 450);
                         
-                        
+                        //Avatar
                         let Avatar = Canvas.Image;
                         let ava = new Avatar;
                         ava.src = buf;
@@ -4788,7 +4788,8 @@ client.on("message", message => {
   ✴-bot ====> يعرض لك كل معلومات البوت:robot: 
  ✴-say ====> يكرر الكلام الي تكتبو:repeat: 
   ✴-savatar ====> صورة السيرفر:frame_photo: 
- ✴-me ====> معلومات عنك:bust_in_silhouette: 
+ ✴-me ====> معلومات عنك:bust_in_silhouette:
+ ✴-id ====> معلومات عنك بالصورة
   ✴-ranks ====> يوريك رتب السيرفر:large_orange_diamond: 
  ✴-send ====> ارسال رسالة لشخص المنشن:mega: 
   ✴-new ====> يفتح لك تكت:tickets: 
