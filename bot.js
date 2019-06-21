@@ -5080,7 +5080,7 @@ client.on('message',async message => {
 ❖-dc ====> مسح كل الرومات:wastebasket: 
   ❖-setnick ====> لتغيير النيكنايم
  ❖-dr ====> مسح كل الرتب:oil: 
-  ❖-del Exm ====> لمسح روم باسمها:scissors: 
+  ❖-del Exm ====> لمسح روم باسمها
  ❖-allbots ====> يوريك كل البوتات في سيرفرك
   ❖-move ====> لسحب عضو الى روم صوتية
  ❖-giveaway ====> لصنع جيفواي:tada: 
