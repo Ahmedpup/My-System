@@ -5057,36 +5057,36 @@ client.on('message',async message => {
       .setDescription(`
       :key:***__اوامر ادارية__***:crown: 
 **
-  ❖-bc ====> رسالة لجميع اعضاء السيرفر بجميع انواعها:inbox_tray: 
-  ❖-bans ====> الاعضاء المبندين من سيرفرك
-  ❖-cto ====> تغير الكلام في اعلى الروم
-  ❖-afk ====> لوضع شخص في وضع afk
- ❖-leave ====> لطرد البوت من سيرفرك:door: 
-  ❖-schannel ====> اضهار الشات المخفية
-   ❖-deletecolors  ====> حذف الالوان
+❖-bc ====> رسالة لجميع اعضاء السيرفر بجميع انواعها:inbox_tray: 
+❖-bans ====> الاعضاء المبندين من سيرفرك
+❖-cto ====> تغير الكلام في اعلى الروم
+❖-afk ====> لوضع شخص في وضع afk
+❖-leave ====> لطرد البوت من سيرفرك:door: 
+❖-schannel ====> اضهار الشات المخفية
+❖-deletecolors  ====> حذف الالوان
 ❖-setDate ====> لصنع روم اليوم
 ❖-setTime ====> لصنع روم الوقت
 ❖-unbanall ====> لفك الباند عن الجميع
- ❖-setName Exemple ====> لتغيير اسم السيرفر 
-  ❖-setIcon ====> لتغيير صورة السيرفر:movie_camera: 
- ❖-kv ====> لطرد عضو من روم صوتي:outbox_tray: 
-  ❖-hchannel ====> اخفاء الشات:no_entry: 
-  ❖-ccolors ====> لصنع 50 لون:rainbow: 
- ❖-setlog ====> لصنع روم اللوج
-  ❖-server ====> يعرض لك معلومات عن السيرفر:gear: 
- ❖-movall ====> لسحب الجميع الى رومك:
-  ❖-sug ====> لصنع اقتراح او توصويت يجب توفر روم الاقتراحات
- ❖-bs ====> لمعرفة سيرفرات البوت:smile: 
- ❖-dc ====> مسح كل الرومات:wastebasket: 
+❖-setName Exemple ====> لتغيير اسم السيرفر 
+❖-setIcon ====> لتغيير صورة السيرفر
+❖-kv ====> لطرد عضو من روم صوتي
+❖-hchannel ====> اخفاء الشات:no_entry: 
+❖-ccolors ====> لصنع 50 لون:rainbow: 
+❖-setlog ====> لصنع روم اللوج
+❖-server ====> يعرض لك معلومات عن السيرفر
+❖-movall ====> لسحب الجميع الى رومك:
+❖-sug ====> لصنع اقتراح او توصويت يجب توفر روم الاقتراحات
+❖-bs ====> لمعرفة سيرفرات البوت:smile: 
+❖-dc ====> مسح كل الرومات:wastebasket: 
   ❖-setnick ====> لتغيير النيكنايم
  ❖-dr ====> مسح كل الرتب:oil: 
   ❖-del Exm ====> لمسح روم باسمها:scissors: 
  ❖-allbots ====> يوريك كل البوتات في سيرفرك
-  ❖-move ====> لسحب عضو الى روم صوتية:robot: 
+  ❖-move ====> لسحب عضو الى روم صوتية
  ❖-giveaway ====> لصنع جيفواي:tada: 
   ❖-role @mention rolename ====> لأعطاء رتبة لعضو معين
- ❖-role all rolename ====> لأعطاء رتبة للجميع:busts_in_silhouette: 
-  ❖-role humans rolename ====> لأعطاء رتبة للاشخاص فقط:man::skin-tone-1: 
+ ❖-role all rolename ====> لأعطاء رتبة للجميع 
+  ❖-role humans rolename ====> لأعطاء رتبة للاشخاص فقط
  ❖-role bots rolename ====> لأعطاء رتبة لجميع البوتات
 ❖-prole @mention rolename  ====> لسحب الرتبة من شخص معين
  ❖-prole all  ====> لسحب الرتبة من الجميع
@@ -5096,10 +5096,10 @@ client.on('message',async message => {
  ❖-clr <numbr> ====> مسح الشات بعدد:shower: 
 ❖-clear ====> مسح الشات:wastebasket: 
   ❖-mute @user <reason> ====> اعطاء العضو ميوت لازم رتبة <Muted>:mute: 
- ❖-unmute @user ====> لفك الميوت عن الشخص :speaking_head: 
+ ❖-unmute @user ====> لفك الميوت عن الشخص  
   ❖-kick @user <reason> ====> طرد الشخص من السيرفر:door: 
  ❖-ban @user <reason> ====> حضر الشخص من السيرفر:no_entry_sign: 
-  ❖-unban @user ====> لفك حضر الشخص من السيرفر:ballot_box_with_check: 
+  ❖-unban @user ====> لفك حضر الشخص من السيرفر
  ❖-mchannel ====> تقفيل الشات:negative_squared_cross_mark: 
   ❖-unmchannel ====> فتح الشات:white_check_mark: 
  ❖-croom ====> لصنع روم بنوعيه:new: 
