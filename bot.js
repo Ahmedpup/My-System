@@ -5046,15 +5046,7 @@ client.on('message', message => {
 
 
 
-client.on("message", message => {
-  if (message.content.includes("<@536886859100585984>")) {
-      message.channel.startTyping();
-      setTimeout(() => {
-        message.channel.stopTyping();
-      }, Math.random() * (1 - 3) + 1 * 1000);
-   
-  }
-});
+
 
 let anti = JSON.parse(fs.readFileSync("./antigreff.json", "UTF8"));
 let config = JSON.parse(fs.readFileSync("./config.json", "UTF8"));
