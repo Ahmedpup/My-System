@@ -5042,11 +5042,7 @@ client.on('message', message => {
     }
 });
 
-client.on('message',message => {
-  if(message.content.startsWith('-joinme'))
-message.member.voiceChannel.join()
-message.reply('**تم**')
-});
+
 
 
 
