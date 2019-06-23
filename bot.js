@@ -5048,13 +5048,7 @@ message.member.voiceChannel.join()
 message.reply('**تم**')
 });
 
-client.on('message', message => {
-    const badwords = ["كلب", "حمار","زق","خرا","كحبة","قحبة","انيكج","انيكك","زبال","ابن كلب","ابن الكلبة","الشرموته","زبي"]; 
-    if( swearWords.some(word => message.content.includes(word)) ) {
-        message.delete();
-        message.author.send('**:rage:  ترا كلامك يعكس تربيتك **');
-      }
-})
+
 
 client.on("message", message => {
   if (message.content.includes("<@536886859100585984>")) {
