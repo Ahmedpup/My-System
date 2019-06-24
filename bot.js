@@ -2229,26 +2229,26 @@ client.on('message', message => {
 });
 
 client.on('guildMemberAdd', member => {
-let channel = member.guild.channels.find(c => c.name === 'welcome');
-let memberavatar = member.user.avatarURL
-  if (!channel) return; 
-let embed = new Discord.RichEmbed()
-    .setColor('RANDOM')
-    .setThumbnail(memberavatar)
-    .addField('🎽 | الاسم :  ',`${member}`)
-    .addField('📢 | انضم:' , `انضم عندنا عضو جديد , ${member}:grinning:  `)
-    .addField('🆔 | الايدي :', "**[" + `${member.id}` + "]**" )
-            .addField('➡| اصبحوا',`${member.guild.memberCount}`)
-           
-              .addField("الاسم:",`<@` + `${member.id}` + `>`, true)
-                
-                                 .addField('شكرا لدخولك سيرفر', `${member.guild.name}`,true)
-                                   
- .setFooter("Pi Po Pa PiP ...?")
-    .setTimestamp()
+    let memberavatar = member.user.avatarURL
+    let embed = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .setThumbnail(memberavatar)
+        .addField('Hello Dude' , `Welcome to the server **${member}**`)
+        .addField('User Id :', "**[" + `${member.id}` + "]**" )
+                .addField(' Member Number',`${member.guild.memberCount}`)
+               
+                  .addField("Name:",`<@` + `${member.id}` + `>`, true)
+                      
+                                     .addField(' Server', `${member.guild.name}`,true)
+.setFooter(member.user.username,'https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif')  
 
-  channel.sendEmbed(embed);
-});
+                                       
+        .setTimestamp()
+    
+    member.createDM().then(function (channel) {
+return channel.send(embed)
+    }
+    )});
 
 client.on('message', message => {
 var prefix = "-";
@@ -4942,7 +4942,6 @@ if (message.content.startsWith(prefix + 'help')) {
 ۞-settings limitsroleC / لتحديد اقصا عدد من صنع الرتب
 ۞-settings limitschannelD / 
 ۞-settings limitstime /
-۞-tAntihack / لتشغيل مضاد الهكر
 ۞-setMedia / لتحديد روم الصور
 ۞-toggleMedia / لفتح روم الصور
 ۞-infomedia / معلومات عن روم الصور
@@ -5037,7 +5036,7 @@ client.on('message', message => {
      let embed = new Discord.RichEmbed()
   .setAuthor(message.author.username)
   .setColor("#8650a7")
-  .addField("Done" , " تــــم ارســالك في الخــاص")
+  .addField("Done" , " تــــم الارســال في الخــاص")
   message.channel.sendEmbed(embed);
     }
 });
@@ -5049,7 +5048,7 @@ client.on('message', message => {
 
 
 let anti = JSON.parse(fs.readFileSync("./antigreff.json", "UTF8"));
-let config = JSON.parse(fs.readFileSync("./config.json", "UTF8"));
+let config = JSON.parse(fs.readFileSync("./co1nfig.json", "UTF8"));
 client.on("message", message => {
     if (!message.channel.guild) return;
     let user = anti[message.guild.id + message.author.id]
@@ -6762,7 +6761,8 @@ client.on('message', message => {
 
 
 client.login(process.env.BOT_TOKEN);
-const Util = require('discord.js'); //البكجات
+
+const Util = require('discord.js'); 
 const getYoutubeID = require('get-youtube-id');
 const fetchVideoInfo = require('youtube-info');
 const YouTube = require('simple-youtube-api');
