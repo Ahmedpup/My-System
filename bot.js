@@ -2770,51 +2770,45 @@ client.on('guildCreate', guild => {
     });
 
 const devs = ["524901565472047116"]
-
-const adminprefix = "+";
+ 
+const adminprefix = "-";
 client.on('message', message => {
     var argresult = message.content.split(` `).slice(1).join(' ');
       if (!devs.includes(message.author.id)) return;
-      
-  if (message.content.startsWith(adminprefix + 'ply')) {
+     
+  if (message.content.startsWith(adminprefix + 'pt')) {
     client.user.setGame(argresult);
       message.channel.sendMessage(`**:white_check_mark:   ${argresult}**`)
-  } else 
+  } else
     if (message.content === (adminprefix + "Percie")) {
     message.guild.leave();        
   } else  
   if (message.content.startsWith(adminprefix + 'wt')) {
   client.user.setActivity(argresult, {type:'WATCHING'});
       message.channel.sendMessage(`**:white_check_mark:   ${argresult}**`)
-  } else 
+  } else
+  if (message.content.startsWith(adminprefix + 'setprefix')) {
+  client.user.setPrefix(argresult).then
+      message.channel.send(`**Prefix Changed :white_check_mark: ${argresult}** `)
+  } else
   if (message.content.startsWith(adminprefix + 'ls')) {
   client.user.setActivity(argresult , {type:'LISTENING'});
       message.channel.sendMessage(`**:white_check_mark:   ${argresult}**`)
-  } else     
+  } else
     if (message.content.startsWith(adminprefix + 'setname')) {
   client.user.setUsername(argresult).then
-      message.channel.sendMessage(`**${argresult}** : تم :>`)
-  return message.reply("**You Can't Change Your Name ,Only After Two Hours :>**");
+      message.channel.sendMessage(`**${argresult}** : Done `)
+  return message.reply("**Name Changed :white_check_mark:**");
   } else
     if (message.content.startsWith(adminprefix + 'setavatar')) {
   client.user.setAvatar(argresult);
     message.channel.sendMessage(`**${argresult}** : تم تغير صورة البوت`);
-        } else     
+        } else    
   if (message.content.startsWith(adminprefix + 'st')) {
     client.user.setGame(argresult, "https://www.twitch.tv/idk");
       message.channel.sendMessage(`**:white_check_mark:   ${argresult}**`)
-  }
-    if(message.content === adminprefix + "restart") {
-      if (!devs.includes(message.author.id)) return;
-          message.channel.send(`:warning:️ **Bot restarting by ${message.author.username}**`);
-        console.log("\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        console.log(`⚠️ Bot restarting... ⚠️`);
-        console.log("===============================================\n\n");
-        client.destroy();
-        child_process.fork(__dirname + "/bot.js");
-        console.log(`Bot Successfully Restarted`);
     }
-  
+ 
   });
 
 
@@ -4934,7 +4928,7 @@ if (message.content.startsWith(prefix + 'help')) {
 ❖-croom / لصنع روم بنوعيه:new: 
 **
    `,`
-       :tools: ***__اوامر اخرى__***:interrobang:
+       ***__other orders__***
  **       
 ۞-settings limitsban / لتحديد اقصى عدد من الباند 
 ۞-settings limitskick / لتحديد اقصى عدد من الطرد
